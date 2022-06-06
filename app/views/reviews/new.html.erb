@@ -1,0 +1,40 @@
+<h1>New review</h1>
+
+<!--
+<%= render "form", review: @review %>
+-->
+
+<br>
+
+<%= form_with(model: [@recipe, @review]) do |form| %>
+  <% if @review.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+      <ul>
+        <% @review.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :rating, style: "display: block" %>
+    <%= form.select :rating, ['', '1', '2', '3', '4', '5'] %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+<div>
+  <a href="/recipes/<%= @recipe.id %>">Back to recipe</a>
+</div>

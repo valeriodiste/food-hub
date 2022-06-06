@@ -1,0 +1,44 @@
+<h1>New recipe</h1>
+
+<!--
+<%= render "form", user: @user, recipe: @recipe %>
+-->
+
+<%= form_with(model: [@user, @recipe]) do |form| %>
+  <% if @recipe.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+
+      <ul>
+        <% @recipe.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  
+  <div>
+    <%= form.label :typology, style: "display: block" %>
+    <%= form.select :typology, ['', 'First Course', 'Main Course', 'Side', 'Desserts', 'Drinks']%>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+<div>
+  <%= link_to "Back to user", profiles_path %>
+</div>

@@ -1,0 +1,34 @@
+<p style="color: green"><%= notice %></p>
+
+
+<% if @recipes.nil? %>
+  <p>No recipes uploaded to the site...</p>
+<% else %>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Username</th>
+      <th><a href="/">Back</th>
+      <!--<th colspan="3"></th>-->
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recipes.each do |recipe| %>
+      <tr>
+        <td><%= recipe.title %></td>
+        <td><%= recipe.user.email %></td>
+        <td><%= link_to 'Show', recipe %></td>
+        <!--
+        <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
+        <td><%= link_to 'Delete', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        -->
+      </tr>
+    <% end %>
+</tbody>
+</table>
+
+<% end %>

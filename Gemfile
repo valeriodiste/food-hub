@@ -27,11 +27,13 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
-gem "cucumber-rails", require: false
+gem "http"
 
-gem "database_cleaner"
+gem "devise"
 
-gem "cucumber-rails-training-wheels"
+# gem "bootstrap", "~> 4.3.1"
+
+
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -56,7 +58,14 @@ gem "bootsnap", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  # gem "debug", platforms: %i[ mri mingw x64_mingw ]
+
+  gem "cucumber-rails", require: false
+
+  gem "database_cleaner"
+
+  gem "cucumber-rails-training-wheels"
+  
 end
 
 group :development do

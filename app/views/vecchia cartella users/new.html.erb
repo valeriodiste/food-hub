@@ -1,0 +1,17 @@
+<h1>Welcome to the registration page</h1>
+
+<div class="errors">
+    <% if flash[:registration_errors] %>
+        <% flash[:registration_errors].each do |error| %>
+            <p><%= error %></p>
+        <% end %>
+    <% end %>
+</div>
+
+<%= render "form", user: @user %>
+
+<br>
+
+<div>
+  <%= link_to "Back to login/registration page", users_path %>
+</div>

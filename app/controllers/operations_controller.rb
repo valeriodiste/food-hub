@@ -27,7 +27,7 @@ class OperationsController < ApplicationController
 
     def find_recipe(name)
       request_api(
-        "https://api.spoonacular.com/recipes/complexSearch?query=#{URI.encode(name)}"
+        "https://api.spoonacular.com/recipes/complexSearch?query=#{URI.encode_www_form_component(name)}"
       )
     end
 

@@ -1,0 +1,97 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @user %>
+
+<div>
+  <%= link_to "Edit this user", edit_user_path(@user) %> |
+  <!--
+  <%= link_to "Back to users", users_path %>
+-->
+  <%= button_to "Destroy this user", @user, method: :delete %>
+
+  <br>
+  <%= link_to "Add a Recipe", new_user_recipe_path(@user) %>
+
+<h2> Recipes: </h2>
+  <% if @user.recipes.empty? %>
+    <p>No recipes published by this user...</p>
+  <% else %>
+    <ul>
+    <% @user.recipes.each do |r| %>
+      <table>
+        <tr>
+          <td>
+            Recipe title:
+          </td>
+          <td>
+            <%= r.title %>
+          </td>
+          <td>
+            <%= link_to "Edit this recipe", edit_recipe_path(r) %>
+          </td>
+          <td>
+            <a href="/recipes_destroy/<%= r.id %>">Delete Recipe</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Description:
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= r.description %>
+          </td>
+        </tr>
+      </table>   
+    <% end %>
+    </ul>
+  <% end %>
+
+
+
+
+  <h2> Reviews: </h2>
+  <% if @user.reviews.empty? %>
+    <p>No reviews for this user...</p>
+  <% else %>
+    <ul>
+    <% @user.reviews.each do |r| %>
+      <table>
+        <tr>
+          <td>
+            Recipe title:
+          </td>
+          <td>
+            <%= Recipe.find(r.recipe_id).title %>
+          </td>
+          <td>
+            <%= link_to "Edit this review", edit_review_path(r) %>
+          </td>
+          <td>
+            <a href="/reviews_destroy/<%= r.id %>">Delete Review</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Rating:
+          </td>
+          <td>
+            <%= r.rating %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Description:
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= r.description %>
+          </td>
+        </tr>
+      </table>   
+    <% end %>
+    </ul>
+  <% end %>
+</div>

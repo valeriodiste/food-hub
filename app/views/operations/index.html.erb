@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--
+credo che questi link si possano togliere
+-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </head>
 <body>
 
+
+<%# andare a cercare e eliminare il flash notice da qualche controller (mi dice che devo loggarmi quando ritorno alla home dalla barra degli url)%>
 <div class="col-lg-12 mt-5">
       <% if flash[:alert] %>
         <div class="alert alert-warning"><%= flash[:alert] %></div>
       <% end %>
       <div class="mx-auto mt-5" style="width: 400px"></div>
 </div>
+
+
+<!--da mettere nella navbar e includerla in tutte le pagine, compreso il codice per fare il login/profilo 
+(si dovrebbe inserire tutto in layouts/application.html.erb)
+-->
+<% if user_signed_in? %>
+Logged in as <%= current_user.email%>
+<%= button_to "Logout", destroy_user_session_path, :onclick => "return confirm('Are you sure you want to logout?')", method: :delete %>
+<% end %>
 
 <div class="container">
   <div class="row">
@@ -39,8 +53,15 @@
     </dl>
     <% end %>
 
-<a href="/recipes">Recipe List</a>
-<a href="/users">Login/Profile</a>
+<a href="/recipes">Recipe List</a> |
+
+<!-- da inserire nella navbar
+-->
+<% if user_signed_in? %>
+  <a href="/profiles">Profile</a>
+<% else %>
+  <%= link_to 'Login', new_user_session_path %>
+<% end %>
 
 
 </body>

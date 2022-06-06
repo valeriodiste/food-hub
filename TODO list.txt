@@ -1,0 +1,4 @@
+lista file che dovrebbero essere inutili:
+    - sessions_controller.rb
+    - prima o poi eliminare la cartella originali in views
+    - prima o poi eliminare la cartella "vecchia cartella users" in views (prima di eliminarla prendere le parti utili e inserirle in /users)

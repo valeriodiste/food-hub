@@ -1,0 +1,64 @@
+<p style="color: green"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @recipe.title %>
+</p>
+<p>
+  <strong>Username:</strong>
+  <%= @recipe.user.email %>
+</p>
+<p>
+  <strong>Typology:</strong>
+  <%= @recipe.typology %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%= @recipe.description %>
+</p>
+
+<%= link_to 'Add Review', new_recipe_review_path(@recipe) %> |
+<%= link_to 'All recipes', recipes_path %>
+
+<% if user_signed_in? %>
+<!--
+  <%= link_to "Back", :back %>
+  -->
+  <%= link_to '| Back to profile', profiles_path %>
+<% end %>
+
+<h2> Reviews: </h2>
+  <% if @recipe.reviews.empty? %>
+    <p>No reviews for this recipe...</p>
+  <% else %>
+    <ul>
+    <% @recipe.reviews.each do |r| %>
+      <table>
+        <tr>
+          <td>
+            <%= r.user.email %>
+          </td>
+          <td>
+            Rating:
+          </td>
+          <td>
+            <%= r.rating %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Description:
+          </td>
+        </tr>
+        <tr>
+        <td>
+          <%= r.description %>
+        </td>
+        </tr>
+      </table>   
+    <% end %>
+    </ul>
+  <% end %>
+<!--
+<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
+-->
