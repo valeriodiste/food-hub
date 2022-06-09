@@ -20,35 +20,45 @@
 <% if @recipe.video %>
 
 	<% 
-		video = Yt::Video.new url: @recipe.video 
-		
+		video_id = @recipe.video.remove("https://www.youtube.com/watch?v=")
+		video = Yt::Video.new(id: video_id)
 	%>
 	
 	<div class="container">
 		<h1>Video of the recipe</h1>
-		<% if !video.empty? %>
+		<% if !video %>
+			<p> The video for this recipe was deleted by its uploader </p>
+		<% else %>
 			<div class="col-md-4">
 				<div class="caption">
 					<h2><%= video.title %></h2>
 					<p>Published at <b><%= video.published_at.strftime('%-d %B %Y %H:%M:%S') %></b></p>
-					<p>
-						<%# <span class="glyphicon glyphicon glyphicon-thumbs-up"></span> video.like_count %>
-						<p>Likes: <b><%= video.like_count %></b></p>
-						<%# <span class="glyphicon glyphicon glyphicon-thumbs-down"></span>  %>
-					
-					</p>
+					<p>Likes: <b><%= video.like_count %></b></p>
 				</div>
 				<% video_url = "https://www.youtube.com/embed/#{video.id}" %>
 				<iframe 
 					src= "<%= video_url %>" 
 					width="420" height="315" >
 				</iframe>
+				<div>
+					<h3>Video Comments</h3>
+					<%
+						video_comments = video.comment_threads.first
+					%>
+					<% if video_comments.nil? %>
+						<p>No comments to show for this video...</p>
+					<% else %>
+						<p><b><%= video_comments.author_display_name %></b></p>
+						<p><%= video_comments.text_display %></p>
+						<%= link_to "Show more comments", @recipe.video %>
+					<%end%>
+				</div>
 			</div>
-		<% else %>
-			<p> The video for this recipe was deleted by its uploader </p>
 		<% end %>
 	</div>
 <% end %>
+
+<br/>
 
 <%= link_to 'Add Review', new_recipe_review_path(@recipe) %> |
 <%= link_to 'All recipes', recipes_path %>

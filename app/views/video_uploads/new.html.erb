@@ -5,7 +5,7 @@
   
 
   <h2>Upload YouTube video to your channel</h2>
-  <% if current_user && !current_user.token.empty? %>
+  <% if current_user && !current_user.provider.nil? %>
     <%= form_for @video_upload do |f| %>
       <%# render 'shared/errors', object: @video_upload %>
 
@@ -30,6 +30,6 @@
       <%= f.submit 'Upload', class: 'btn btn-primary' %>
     <% end %>
   <% else %>
-    <p><%= link_to 'sign in', '/auth/google_oauth2' %> to upload a video to YouTube.</p>
+		<p><%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, method: :post %> to upload a video to YouTube.</p>
   <% end %>
 </div>

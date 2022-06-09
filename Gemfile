@@ -44,8 +44,8 @@ gem 'google-api-client'
 # Permette di utilizzare un ActiveRecord senza che ci sia effettivamente un record nel database (trsmite la classe ActiveType::Object, usata dal model video_upload.rb)
 gem 'active_type'	#, '0.3.1'
 
-# ??? non so se esiste ancora...
-gem 'yt', '~> 0.13.7'
+# Gemma per l'utiliizzo delle API YouTube
+gem 'yt', '~> 0.32.5'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
