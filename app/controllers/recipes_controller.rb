@@ -46,7 +46,7 @@ class RecipesController < ApplicationController
     # id_user = session[:user_id]
 		# @user = User.find(id_user)
 
-		@user = current_user
+    @user = current_user
     @recipe = Recipe.new
   end
 
@@ -67,7 +67,7 @@ class RecipesController < ApplicationController
       if @recipe.save
         # redirect_to user_path(session[:user_id])
         # format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }
-        format.html { redirect_to profiles_path, notice: "Recipe was successfully created." }
+        format.html { redirect_to video_uploads_path(params: { recipetitle: recipe_params['title'] }), notice: "Recipe was successfully created." }
         format.json { render :show, status: :created, location: @recipe }
       else
         format.html { render :new, status: :unprocessable_entity }

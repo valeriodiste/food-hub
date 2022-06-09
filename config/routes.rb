@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }	# Route per la callback del "Sign in with Google" con OAuth
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   root to: "operations#index"
@@ -54,6 +56,11 @@ Rails.application.routes.draw do
   
 
   #get "/operations/:id", to: "operations#trigger"
+
+  # Route per operazioni con API YouTube
+  get "/video_uploads" => "video_uploads#new"
+
+  resources :video_uploads, only: [:new, :create]
 
 
 end

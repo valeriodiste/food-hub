@@ -309,4 +309,19 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+
+  # Google OAuth
+  # Teoricamente le variabili dell'app id e secret id vanno inserite nel file criptato credentials.yml.enc come variabili d'ambiente...
+#   config.omniauth :google_oauth2, Rails.application.credentials.dig(:oauth_google, :APP_ID), Rails.application.credentials.dig(:oauth_google, :APP_SECRET),  {}
+	config.omniauth :google_oauth2, 
+		Rails.application.credentials[:oauth_google][:app_id], 
+		Rails.application.credentials[:oauth_google][:app_secret], 
+		scope: 'userinfo.profile, userinfo.email, youtube', 
+		additional_parameters: {
+			"access_type" => "offline",         # offline access
+			"include_granted_scopes" => "true"  # incremental auth
+		}
+#   config.omniauth :google_oauth2, '676721621696-o1nndueraaj0mjkcjg30na0lqclrpkv5.apps.googleusercontent.com', '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', {}	# Giuseppe
+
+
 end

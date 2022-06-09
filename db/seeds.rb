@@ -23,11 +23,11 @@ end
 # adding some recipes
 more_recipes = [
     {:title => 'Pasta e Vongole', :user_id => '1',
-      :typology => 'Main-Course', :description => 'Primo piatto di pasta e vongole'},
+      :typology => 'Main Course', :description => 'Primo piatto di pasta e vongole'},
     {:title => 'Pasta e Patate', :user_id => '1',
-      :typology => 'Main-Course', :description => 'Primo piatto di pasta e patate'},
+      :typology => 'Main Course', :description => 'Primo piatto di pasta e patate'},
     {:title => 'Carbonara', :user_id => '2',
-      :typology => 'Main-Course', :description => 'Primo piatto di carbonara'},
+      :typology => 'Main Course', :description => 'Primo piatto di carbonara'},
     {:title => 'Cotoletta', :user_id => '2',
       :typology => 'Side', :description => 'Secondo piatto di cotolette'}
 ]
@@ -38,7 +38,7 @@ end
 
 
 # settarle manualmente per ogni utente perché assegnandole randomicamente può accadere 
-# che venga assegnata una recensione per una stessa coppia ricetta-utente
+# che venga assegnata una recensione per una stessa coppia ricetta utente
 # e quindi non viene aggiunta al database
 
 # adding some reviews

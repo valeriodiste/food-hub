@@ -1,0 +1,35 @@
+<div class="container">
+  <h1>Upload a video?</h1>
+
+  <p>You can upload a video of your recipe on your YouTube channel or <%= link_to "continue without uploading a video", profiles_path %></p>
+  
+
+  <h2>Upload YouTube video to your channel</h2>
+  <% if current_user && !current_user.token.empty? %>
+    <%= form_for @video_upload do |f| %>
+      <%# render 'shared/errors', object: @video_upload %>
+
+      <div class="form-group">
+        <%= f.label :file %>
+        <%= f.file_field :file, class: 'form-control', required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: 'form-control', required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :description %>
+		<br/>
+        <%= f.text_area :description, class: 'form-control', cols: 50 %>
+      </div>
+
+	  <%= f.hidden_field :recipetitle, :value => params[:recipetitle] %>
+
+      <%= f.submit 'Upload', class: 'btn btn-primary' %>
+    <% end %>
+  <% else %>
+    <p><%= link_to 'sign in', '/auth/google_oauth2' %> to upload a video to YouTube.</p>
+  <% end %>
+</div>

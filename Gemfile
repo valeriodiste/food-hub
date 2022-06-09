@@ -33,7 +33,19 @@ gem "devise"
 
 # gem "bootstrap", "~> 4.3.1"
 
+gem 'omniauth', '~> 1.9.1'
+gem 'omniauth-google-oauth2'
+# gem 'omniauth-rails_csrf_protection', '~> 1.0.1'
 
+# YouTube
+gem 'google-api-client'
+# gem 'google-api-client', '>0.7'
+
+# Permette di utilizzare un ActiveRecord senza che ci sia effettivamente un record nel database (trsmite la classe ActiveType::Object, usata dal model video_upload.rb)
+gem 'active_type'	#, '0.3.1'
+
+# ??? non so se esiste ancora...
+gem 'yt', '~> 0.13.7'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

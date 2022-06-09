@@ -5,40 +5,50 @@
 -->
 
 <%= form_with(model: [@user, @recipe]) do |form| %>
-  <% if @recipe.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
 
-      <ul>
-        <% @recipe.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<% if @recipe.errors.any? %>
+		<div style="color: red">
+		<h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
+		<ul>
+			<% @recipe.errors.each do |error| %>
+			<li><%= error.full_message %></li>
+			<% end %>
+		</ul>
+		</div>
+	<% end %>
 
-  
-  <div>
-    <%= form.label :typology, style: "display: block" %>
-    <%= form.select :typology, ['', 'First Course', 'Main Course', 'Side', 'Desserts', 'Drinks']%>
-  </div>
+	<div>
+		<%= form.label :title, style: "display: block" %>
+		<%= form.text_field :title %>
+	</div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
-  </div>
 
-  <div>
-    <%= form.submit %>
-  </div>
+	<div>
+		<%= form.label :typology, style: "display: block" %>
+		<%= form.select :typology, ['', 'First Course', 'Main Course', 'Side', 'Desserts', 'Drinks']%>
+	</div>
+
+	<div>
+		<%= form.label :description, style: "display: block" %>
+		<%= form.text_field :description %>
+	</div>
+
+	<%# if current_user %>
+		<%# <div> %>
+		 	<%# form.label :upload_video, style: "display: block" %>
+			<%# form.file_field :upload_video %>
+			<%# link_to 'Upload video to YouTube', new_video_upload_path  %>
+		<%# </div> %>
+	 <%# end %>
+
+	<div>
+		<%= form.submit %>
+	</div>
+
 <% end %>
 
 
 <div>
-  <%= link_to "Back to user", profiles_path %>
+	<%= link_to "Back to user", profiles_path %>
 </div>
