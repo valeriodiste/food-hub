@@ -77,6 +77,11 @@ group :development, :test do
   gem "database_cleaner"
 
   gem "cucumber-rails-training-wheels"
+
+  gem "rspec-rails"
+
+  # utilizzata per rspec con i controller
+  gem "rails-controller-testing"
   
 end
 

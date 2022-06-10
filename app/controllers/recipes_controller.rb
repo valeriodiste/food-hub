@@ -28,7 +28,6 @@ class RecipesController < ApplicationController
   # end
 
 
-
   before_action :set_recipe, only: %i[ show edit update destroy ]
 
   # GET /recipes or /recipes.json
@@ -46,7 +45,7 @@ class RecipesController < ApplicationController
     # id_user = session[:user_id]
 		# @user = User.find(id_user)
 
-    @user = current_user
+	@user = current_user
     @recipe = Recipe.new
   end
 

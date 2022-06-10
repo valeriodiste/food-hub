@@ -16,6 +16,40 @@ module NavigationHelpers
     when /^the home\s?page$/
       '/'
 
+    when /^the login page/
+      '/users/sign_in'
+
+    when /^the sign up page/
+      '/users/sign_up'
+
+    when /^the profile page/
+      '/profiles'
+
+    when /^the new recipe page/
+      '/users/1/recipes/new'
+     
+    when /^the recipe list page/
+      '/recipes'
+
+    when /^the recipe info page/
+      '/recipes/1'
+
+    when /^the video uploads page/
+      '/video_uploads'
+     
+
+
+    # spoonocular paths
+    when /^the spoonocular recipe list page/
+      '/search'
+      
+    when /^the spoonocular recipe info page/
+      '/search_recipe_info/654959'
+
+    when /^the spoonocular ingredient info page/
+      '/search_ingredient_info/20081'
+
+      
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

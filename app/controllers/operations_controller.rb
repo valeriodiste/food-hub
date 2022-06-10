@@ -15,9 +15,7 @@ class OperationsController < ApplicationController
     end
 
 
-
-
-    
+	
     def request_api(url)
         response = HTTP.timeout(10).get(url, :params => {:apiKey => Rails.application.credentials[:spoonocular][:api_key], :addRecipeInformation => 'true', :number => '3'})
         return nil if response.status != 200
