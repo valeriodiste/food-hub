@@ -16,6 +16,17 @@
   <strong>Description:</strong>
   <%= @recipe.description %>
 </p>
+<p>
+  <strong>Published at:</strong>
+  <%= @recipe.created_at %>
+</p>
+
+<%# Opzione che compare solo se l'utente corrente possiede il ruolo necessario a svolgere l'azione %>
+<% if can? :destroy, @recipe %>
+	<%= link_to 'Delete Recipe', "/recipes_destroy/#{@recipe.id}" , method: :delete, data: { confirm: 'Are you sure?' } %>
+	<br/>
+	<br/>
+<% end %>
 
 <% if @recipe.video %>
 
@@ -56,9 +67,10 @@
 			</div>
 		<% end %>
 	</div>
+	<br/>
+
 <% end %>
 
-<br/>
 
 <%= link_to 'Add Review', new_recipe_review_path(@recipe) %> |
 <%= link_to 'All recipes', recipes_path %>
@@ -67,7 +79,7 @@
 <!--
   <%= link_to "Back", :back %>
   -->
-  <%= link_to '| Back to profile', profiles_path %>
+  <%= link_to '| Back', :back %>
 <% end %>
 
 <h2> Reviews: </h2>
@@ -81,6 +93,10 @@
           <td>
             <%= r.user.email %>
           </td>
+			<%# Opzione che compare solo se l'utente corrente possiede il ruolo necessario a svolgere l'azione %>
+			<% if can? :destroy, r %>
+				<td><%= link_to 'Delete Review', "/reviews_destroy/#{r.id}" , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			<% end %>
           <td>
             Rating:
           </td>

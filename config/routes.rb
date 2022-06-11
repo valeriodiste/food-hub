@@ -38,6 +38,9 @@ Rails.application.routes.draw do
   get "/profiles" => "profiles#index"
   # post "/profiles" => "users#create"
 
+  get "/show_profiles" => "profiles#show"
+  get "/delete_profile/:id" => "profiles#destroy"
+
   #post "/users" => "users#create"
 
   # resources :users

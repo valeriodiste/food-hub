@@ -82,6 +82,9 @@
           <td>
             <%= Recipe.find(r.recipe_id).title %>
           </td>
+		  <td>
+			  <%= link_to "Show related recipe", Recipe.find(r.recipe_id) %>
+          </td>
           <td>
             <%= link_to "Edit this review", edit_review_path(r) %>
           </td>
@@ -112,3 +115,10 @@
     </ul>
   <% end %>
 </div>
+
+<% if current_user.admin? %>
+	<div>
+		<h3>Admin controls</h3>
+		<%= link_to "Manage registered users", show_profiles_url %>
+	</div>
+<% end %>

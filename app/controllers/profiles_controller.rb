@@ -15,7 +15,7 @@ class ProfilesController < ApplicationController
         # inserire il controllo per vedere se si è amministratori e poi aggiungere anche il controllo
         #  nella index di profiles per far apparire il bottone "vedi tutti gli utenti"
 
-        @users = User.all
+		@users = User.all
     end
   
     # # GET /users/new
@@ -59,26 +59,38 @@ class ProfilesController < ApplicationController
     #   end
     # end
   
-    # # DELETE /users/1 or /users/1.json
-    # def destroy
-    #   @user.destroy
-    #   session.clear
-    #   # session[:user_id] = ""
-    #   respond_to do |format|
-    #     format.html { redirect_to users_url, notice: "User was successfully destroyed." }
-    #     format.json { head :no_content }
-    #   end
-    # end
+    # DELETE /users/1 or /users/1.json
+    def destroy
+
+		set_user()
+
+		# Autorizzazioni (Canard + CanCan)
+		authorize! :destroy, @user, :message => "BEWARE: you are not authorized to delete users."
+
+		if @user.admin?
+			redirect_back_or_to root_path, notice: "You cannot delete an admin." 
+		else
+			@user.destroy
+			# session.clear
+			# session[:user_id] = ""
+			respond_to do |format|
+				format.html { redirect_back_or_to root_path, notice: "User was successfully destroyed." }
+				format.json { head :no_content }
+			end
+		end
+
+    end
   
-    # private
-    #   # Use callbacks to share common setup or constraints between actions.
-    #   def set_user
-    #     @user = User.find(params[:id])
-    #   end
+    private
+      # Use callbacks to share common setup or constraints between actions.
+      def set_user
+        @user = User.find(params[:id])
+      end
   
-    #   # Only allow a list of trusted parameters through.
-    #   def user_params
-    #     params.require(:user).permit(:username, :password)
-    #   end
+      # Only allow a list of trusted parameters through.
+      def user_params
+        params.require(:user).permit(:username, :password)
+      end
+	
   end
   

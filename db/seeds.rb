@@ -7,34 +7,58 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
+# Elimina tutti i record nelle tabelle prima di applicare il seed
+User.destroy_all
+Recipe.destroy_all
+Review.destroy_all
 
 
+# Adding users
+# =begin
 more_user = [
-	{:email => 'mario@gmail.com', :password => 'aaaaaaaa'},
-	{:email => 'anna@gmail.com', :password => 'aaaaaaaa'},
-	{:email => 'gianni@gmail.com', :password => 'aaaaaaaa'}
+	{:email => 'mario@gmail.com', :password => 'password'},
+	{:email => 'anna@gmail.com', :password => 'password'},
+	{:email => 'gianni@gmail.com', :password => 'password'}
 ]
-
 more_user.each do |user|
-  User.create!(user)
+  	u = User.create!(user)
+	u.roles << :user
+	u.save!
 end
+
+# Crea utente amministratore
+admin_user = User.create!({:email => 'valerio@gmail.com', :password => 'password'})
+admin_user.roles << :admin
+admin_user.save!
+
+admin_user = User.create!({:email => 'giuseppe@gmail.com', :password => 'password'})
+admin_user.roles << :admin
+admin_user.save!
+# =end
 
 
 # adding some recipes
+# =begin
+n_of_users = User.all.size - 1
+first_id_of_user = User.first.id
+user_id_to_assing_1 = rand(first_id_of_user..(first_id_of_user + n_of_users - 1))
+user_id_to_assing_2 = user_id_to_assing_1 + 1
+
 more_recipes = [
-    {:title => 'Pasta e Vongole', :user_id => '1',
+    {:title => 'Pasta e Vongole', :user_id => user_id_to_assing_1,
       :typology => 'Main Course', :description => 'Primo piatto di pasta e vongole'},
-    {:title => 'Pasta e Patate', :user_id => '1',
+    {:title => 'Pasta e Patate', :user_id => user_id_to_assing_1,
       :typology => 'Main Course', :description => 'Primo piatto di pasta e patate'},
-    {:title => 'Carbonara', :user_id => '2',
+    {:title => 'Carbonara', :user_id => user_id_to_assing_2,
       :typology => 'Main Course', :description => 'Primo piatto di carbonara'},
-    {:title => 'Cotoletta', :user_id => '2',
+    {:title => 'Cotoletta', :user_id => user_id_to_assing_2,
       :typology => 'Side', :description => 'Secondo piatto di cotolette'}
 ]
   
 more_recipes.each do |recipe|
   Recipe.create!(recipe)
 end
+# =end
 
 
 # settarle manualmente per ogni utente perché assegnandole randomicamente può accadere 
@@ -42,22 +66,30 @@ end
 # e quindi non viene aggiunta al database
 
 # adding some reviews
+# =begin
 more_reviews = [
 	{:rating => 2, :description => 'Potrebbe essere migliorata'},
 	{:rating => 5, :description => 'Molto buona!'},
 	{:rating => 3, :description => 'Decente'},
-  {:rating => 1, :description => 'Non mi è piaciuta'},
-  {:rating => 1, :description => 'Disgustosa'},
-  {:rating => 4, :description => 'Sembra interessante!'},
+	{:rating => 1, :description => 'Non mi è piaciuta'},
+	{:rating => 1, :description => 'Disgustosa'},
+	{:rating => 4, :description => 'Sembra interessante!'},
 ]
 
-
 # random assignment
-recipe_counter = Recipe.all.size
-user_counter = User.all.size
+
+n_of_users = User.all.size - 1
+first_id_of_user = User.first.id
+# rand(first_id_of_user..(first_id_of_user + n_of_users))
+
+n_of_recipes = Recipe.all.size - 1
+first_id_of_recipe = Recipe.first.id
+# rand(first_id_of_recipe..(first_id_of_recipe + n_of_recipes))
+
 more_reviews.each do |review|
   r = Review.new(review)
-  r.recipe = Recipe.find(rand(1..recipe_counter))
-  r.user = User.find(rand(1..user_counter))
+  r.recipe = Recipe.find(rand(first_id_of_recipe..(first_id_of_recipe + n_of_recipes)))
+  r.user = User.find(rand(first_id_of_user..(first_id_of_user + n_of_users)))
   r.save
 end
+# =end

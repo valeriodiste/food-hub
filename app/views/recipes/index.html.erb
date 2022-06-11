@@ -17,17 +17,21 @@
   </thead>
 
   <tbody>
-    <% @recipes.each do |recipe| %>
-      <tr>
-        <td><%= recipe.title %></td>
-        <td><%= recipe.user.email %></td>
-        <td><%= link_to 'Show', recipe %></td>
-        <!--
-        <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
-        <td><%= link_to 'Delete', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        -->
-      </tr>
-    <% end %>
+	<% @recipes.each do |recipe| %>
+		<tr>
+			<td><%= recipe.title %></td>
+			<td><%= recipe.user.email %></td>
+			<td><%= link_to 'Show', recipe %></td>
+			<!--
+			<td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
+			-->
+
+			<%# Opzione che compare solo se l'utente corrente possiede il ruolo necessario a svolgere l'azione %>
+			<% if can? :destroy, recipe %>
+				<td><%= link_to 'Delete Recipe', "recipes_destroy/#{recipe.id}" , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			<% end %>
+		</tr>
+	<% end %>
 </tbody>
 </table>
 

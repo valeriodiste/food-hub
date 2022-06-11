@@ -34,10 +34,6 @@ module NavigationHelpers
     when /^the recipe info page/
       '/recipes/1'
 
-    when /^the video uploads page/
-      '/video_uploads'
-     
-
 
     # spoonocular paths
     when /^the spoonocular recipe list page/

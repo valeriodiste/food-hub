@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>FoodHub</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+	<head>
+		<title>FoodHub</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<%= csrf_meta_tags %>
+		<%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+		<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+		<%= javascript_importmap_tags %>
+	</head>
 
-  <body>
+	<body>
 
-<!--
-  aggiunto per fare la prova con cucumber
-  -->
-    <a href="/">Home Page</a>
+		<%# Alert visualizzato in caso di operazioni con mancato permesso/autorizzazione (Canard + CanCan) %>
+		<p class="notice"><%= notice %></p>
+ 		<p class="alert"><%= alert %></p>
+
+		<!-- aggiunto per fare la prova con cucumber -->
+		<a href="/">Home Page</a>
 
 
-    <%= yield %>
-  </body>
+		<%= yield %>
+	</body>
 </html>

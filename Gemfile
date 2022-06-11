@@ -47,6 +47,9 @@ gem 'active_type'	#, '0.3.1'
 # Gemma per l'utiliizzo delle API YouTube
 gem 'yt', '~> 0.32.5'
 
+# Access Control
+gem 'canard', '~> 0.6.2.pre'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

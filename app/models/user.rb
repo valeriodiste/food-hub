@@ -1,14 +1,17 @@
 class User < ApplicationRecord
 
-  has_many :reviews, dependent: :destroy
+	# Canard roles
+	acts_as_user :roles => :admin
+
+	has_many :reviews, dependent: :destroy
 	has_many :recipes, dependent: :destroy
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-		#  :confirmable,	# Aggiungere :confirmable per la conferma via email, forse è questo l'errore che dava
-		 :omniauthable,	:omniauth_providers => [:google_oauth2]		# Per OAuth (con Google in questo caso)
+	# Include default devise modules. Others available are:
+	# :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+	devise :database_authenticatable, :registerable,
+			:recoverable, :rememberable, :validatable,
+			#  :confirmable,	# Aggiungere :confirmable per la conferma via email, forse è questo l'errore che dava
+			:omniauthable,	:omniauth_providers => [:google_oauth2]		# Per OAuth (con Google in questo caso)
 
 	def self.from_omniauth(auth)
 		
