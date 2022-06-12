@@ -1,4 +1,7 @@
 Feature: Find Ingredient from recipe
+  come visitatore
+  in modo da poter conoscere i dettagli di ogni ingrediente di una ricetta
+  voglio vedere le informazioni di un ingrediente
 
 Scenario: Find Ingredient from a recipe
   Given I am on the home page

@@ -252,3 +252,11 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+Given /^(?:|I )am a registered user$/ do
+  @user = User.create({:email => "test@gmail.com", :password => "password", :password_confirmation => "password"})
+end 
+
+Given /^(?:|I )created a recipe named "([^"]*)"$/ do |string|
+  @recipe = Recipe.create({:user_id => "1", :title => string, :typology => "Main Course", :description => "Pizza col sugo di pomodoro e salame piccante"})
+end
