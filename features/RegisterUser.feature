@@ -9,7 +9,7 @@ Scenario: Registration
   Then I should be on the login page
   When I follow "Sign up"
   Then I should be on the sign up page
-  When I fill in "Email" with "test@gmail.com"
+  When I fill in "Email" with "test1@gmail.com"
   And I fill in "Password" with "password"
   And I fill in "Password confirmation" with "password"
   And I press "Sign up"

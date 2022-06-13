@@ -258,5 +258,9 @@ Given /^(?:|I )am a registered user$/ do
 end 
 
 Given /^(?:|I )created a recipe named "([^"]*)"$/ do |string|
+  # distrugge le altre recipes
+  Recipe.all.each do |recipe|
+    recipe.destroy
+  end
   @recipe = Recipe.create({:user_id => "1", :title => string, :typology => "Main Course", :description => "Pizza col sugo di pomodoro e salame piccante"})
 end

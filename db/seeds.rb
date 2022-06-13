@@ -52,7 +52,11 @@ more_recipes = [
     {:title => 'Carbonara', :user_id => user_id_to_assing_2,
       :typology => 'Main Course', :description => 'Primo piatto di carbonara'},
     {:title => 'Cotoletta', :user_id => user_id_to_assing_2,
-      :typology => 'Side', :description => 'Secondo piatto di cotolette'}
+      :typology => 'Side', :description => 'Secondo piatto di cotolette'},
+    {	:title => 'Pasta al sugo', :user_id => user_id_to_assing_1,
+		  :typology => 'Main Course', :description => 'Primo piatto, spaghetti al sugo con basilico fresco, un sugo saporito e corposo, 
+						che avvolge gli spaghetti nel suo caldo abbraccio',
+		  :video => 'https://www.youtube.com/watch?v=AZ1kuh0pZ_g'}
 ]
   
 more_recipes.each do |recipe|

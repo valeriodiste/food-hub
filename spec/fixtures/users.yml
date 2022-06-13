@@ -1,4 +1,4 @@
 user:
   id: 1
   email: test@gmail.com
-  encrypted_password: password
+  encrypted_password: $2a$12$dJn/OC.2VgVGYI882mrKKOJovFSQW.nS8oASrxmNShbj9UM0Ltfvi

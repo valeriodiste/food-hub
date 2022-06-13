@@ -17,7 +17,7 @@ class Recipe < ApplicationRecord
           map(&:capitalize).join(' ')
     end
 
-    validates :title, :presence => true, format: {with: /\A[a-zA-Z-_.\ ]+\z/, message: "Invalid title format"}
+    validates :title, :presence => true, format: {with: /\A[a-zA-Z\-_.\ ]+\z/, message: "Invalid title format"}
 	validates :description, :presence => true
 	validates :typology, :inclusion => {:in => Recipe.all_typologies}
 

@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
-  # non so se è corretto, ma al momento funziona
+  
   resources :users do
     resources :reviews
     resources :recipes
@@ -26,17 +26,11 @@ Rails.application.routes.draw do
 
   resources :reviews
 
-  # da eliminare
-  post "/sessions" => "sessions#create"
-
-
-
-  # non so se sono definitivi, però al momento funzionano
   get "/recipes_destroy/:id" => "recipes#destroy"
   get "/reviews_destroy/:id" => "reviews#destroy"
 
   get "/profiles" => "profiles#index"
-  # post "/profiles" => "users#create"
+
 
   get "/show_profiles" => "profiles#show"
   get "/delete_profile/:id" => "profiles#destroy"
