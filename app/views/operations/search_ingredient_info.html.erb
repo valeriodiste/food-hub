@@ -1,43 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-</head>
-<body>
+<div class="ingridient-info">
+	<% if !@ingredient_info['image'].nil? %>
+	<% image_path = "https://spoonacular.com/cdn/ingredients_500x500/" + @ingredient_info['image'] %>
+	<%= image_tag( image_path, class: "soft-shadow") %>
+	<% else %>
+		<%= image_tag("image-unavailable.png", class: "soft-shadow") %>
+	<% end %>
 
-<div class="container">
-  <div class="row mt-5">
-    <div class="col-lg-6">
-      <h4>Ingredient info:</h4>
-      <dl>
-        <dt>Ingredient Id</dt>
-        <dd><%= @ingredient_info['id'] %></dd>
-        <dt>Ingredient Name</dt>
-        <dd><%= @ingredient_info['name'] %></dd>
-        <dt>Ingredient Original Name</dt>
-        <dd><%= @ingredient_info['originalName'] %></dd>
-        <dt>Consistency</dt>
-        <dd><%= @ingredient_info['consistency'] %></dd>
-        <dt>Estimated Cost (per 100 grams)</dt>
-        <dd><%= @ingredient_info['estimatedCost']['value'] %> <%= @ingredient_info['estimatedCost']['unit'] %></dd>
-      </dl>
-    <h4>Nutrients:</h4>
-    <% if @ingredient_info['nutrition']!=nil %>
-        <% @ingredient_info['nutrition']['nutrients'].each do |nutrient| %>
-        <dl>
-            <dd>Name: <%= nutrient['name'] %></dd> 
-            <dd>Amount: <%= nutrient['amount'] %></dd>
-            <dd>Unit: <%= nutrient['unit'] %></dd> 
-            <dd>Percent of Daily Needs: <%= nutrient['percentOfDailyNeeds'] %></dd>
-        </dl>
-        <% end %>
-    <% else %>
-        non sono stati trovati i nutrienti
-    <% end %>
-    </div>
-  </div>
+	<div class="soft-shadow">
+		<h1><%= @ingredient_info['name'].capitalize %></h1>
+		Estimated Cost: <b><%= @ingredient_info['estimatedCost']['value'] %> <%= @ingredient_info['estimatedCost']['unit'] %></b> (per 100 grams)
+		<% if !@ingredient_info['nutrition']['caloricBreakdown'].nil? %>
+			<table style="width: 100%; margin-top: 20px; font-size: 1.1em;">
+				<tr>
+					<td style="text-align: left;">
+						<b><%= @ingredient_info['nutrition']['caloricBreakdown']['percentProtein'] %>%</b> protein
+					</td>
+					<td style="text-align: center;">
+						<b><%= @ingredient_info['nutrition']['caloricBreakdown']['percentFat'] %>%</b> fat
+					</td>
+					<td style="text-align: right;">
+						<b><%= @ingredient_info['nutrition']['caloricBreakdown']['percentCarbs'] %>%</b> carbs
+					</td>
+				</tr>
+			</table>
+		<% end %>
+	</div>
+	<h4>Nutritional values:</h4>
+	<% if !@ingredient_info['nutrition'].nil? %>
+		<span><b><%= @ingredient_info['nutrition']['nutrients'].first['name'] %></b>: <%= @ingredient_info['nutrition']['nutrients'].first['amount'] %><%= @ingredient_info['nutrition']['nutrients'].first['unit'] %></span>
+		<% @ingredient_info['nutrition']['nutrients'][1,@ingredient_info['nutrition']['nutrients'].length].each do |nutrient| %>
+			<span>| <b><%= nutrient['name'] %></b>: <%= nutrient['amount'] %><%= nutrient['unit'] %></span>
+		<% end %>
+	<% else %>
+		Nutritional values not available...
+	<% end %>
 </div>
-
-</body>
-</html>

@@ -62,8 +62,9 @@ Rails.application.routes.draw do
 
   # Route per operazioni con API YouTube
   get "/video_uploads" => "video_uploads#new"
-
   resources :video_uploads, only: [:new, :create]
+  resources :video_links, only: [:new, :create]
 
+  get "/video_links" => "video_links#new"
 
 end

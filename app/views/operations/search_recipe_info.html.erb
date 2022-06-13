@@ -1,41 +1,120 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-</head>
-<body>
 
-<div class="container">
-  <div class="row mt-5">
-    <div class="col-lg-6">
-      <h4>Recipe info</h4>
-      <dl>
-        <dt>Recipe Id</dt>
-        <dd><%= @recipe_info[0]['id'] %></dd>
-        <dt>Recipe Title</dt>
-        <dd><%= @recipe_info[0]['title'] %></dd>
-        <dt>Health Score</dt>
-        <dd><%= @recipe_info[0]['healthScore'].to_s %></dd>
-        <dt>Price Per Serving</dt>
-        <dd><%= @recipe_info[0]['pricePerServing'].to_s %></dd>
-      </dl>
-    <h4>Ingredients:</h4>
-    <% @recipe_info[0]['extendedIngredients'].each do |ingredient| %>
-    <dl>
-        <dd><a href="/search_ingredient_info/<%= ingredient['id'] %>"><%= ingredient['name'] %></a></dd>
-    </dl>
-    <% end %>
-    <h4>Similar Recipes:</h4>
-    <% @recipe_info[1].each do |similar| %>
-    <dl>
-        <dd><a href="/search_recipe_info/<%= similar['id'] %>"><%= similar['title'] %></a></dd>
-    </dl>
-    <% end %>
+<%# Prende i risultati dall'API Spoonacular %>
+<%
+	official_recipe = @recipe_info[0] 
+ 	official_similar = @recipe_info[1]
+%>
 
-    </div>
-  </div>
+<%# Genera dei risultati fittizzi (per non dover utilizzare chiamate API) %>
+<%# 
+	official_recipe = {
+		"title" => "Pasta With Tuna",
+		"instructions" => "<ol>
+			<li>Preheat oven to 400 F.</li>
+			<li>Remove crusts from bread and cut into bite-sized croutons.</li>
+			<li>Rub garlic in bottom of a small oven-safe skillet, add 2 teaspoons olive oil.</li>
+			<li> Rub croutons in oil until they absorb it all. </li>
+			<li>Bake for 7-10 minutes or until deep golden brown. </li>
+			<li>Remove and set aside.</li>
+			<li>Slice anchovies in thirds. </li>
+			<li>Toss with scallions. </li>
+			<li>Divide into small cups, ramekins or bowls between 4 and 8 ounces and nestle in the croutons.</li>
+			</ol>",
+		"summary" => "Pasta With Tuna might be just the main course you are searching for. One serving contains 421 calories, 24g of protein, and 10g of fat. For $1.68 per serving, this recipe covers 28% of your daily requirements of vitamins and minerals. 1 person were impressed by this recipe. Head to the store and pick up flour, onion, peas, and a few other things to make it today. It is a good option if you're following a pescatarian diet. All things considered, we decided this recipe deserves a spoonacular score of 92%. This score is excellent. Try Pastan and Tuna Salad (Ensalada de Pasta y Atún), Tuna Pasta, and Tuna Pasta for similar recipes.",
+		"healthScore" => "55",
+		"pricePerServing" => "168.12",
+		"extendedIngredients" => [
+				{"id" => "1", "name" => "flour"},
+				{"id" => "2", "name" => "green"},
+				{"id" => "3", "name" => "non-fat milk"},
+				{"id" => "4", "name" => "olive"},
+				{"id" => "5", "name" => "water-packed tuna"},
+				{"id" => "6", "name" => "parmesan"}
+			],
+		"image" => "gluten_free.png"
+	}
+	
+	official_similar = [
+		{"id" => "1", "title" => "Pasta With Sugo"},
+		{"id" => "2", "title" => "Pasta and Tuna Salad (Ensalada de Pasta y Atún)"},
+		{"id" => "3", "title" => "Pane e marmellata"}
+	]
+%>
+
+<div class="official-recipe">
+
+	<div>
+		<% if official_recipe['image'] %>
+			<%= image_tag(official_recipe['image']) %>
+		<% else %>
+			<%= image_tag("image-unavailable.png") %>
+		<% end %>
+	</div>
+
+	<div>
+		<h2><%= official_recipe['title'] %></h2>
+
+		<div>
+			Health score 
+			<div class="health-bar">
+				<div style="width: <%= official_recipe['healthScore'].to_s %>%;"></div>
+				<div><%= official_recipe['healthScore'].to_s %>%</div>
+			</div>
+		</div>
+
+		<div>
+			<b><%= official_recipe['pricePerServing'].to_s %>$</b> per serving
+		</div>
+
+		<div>
+			<h4>Ingredients:</h4>
+			<div>
+				<% official_recipe['extendedIngredients'].each do |ingredient| %>
+					<a href="/search_ingredient_info/<%= ingredient['id'] %>" class="link-to-btn"><%= ingredient['name'] %></a>
+				<% end %>
+			</div>
+		</div>
+
+	</div>
 </div>
 
-</body>
-</html>
+
+<div class="official-recipe-description">
+	<h4>Recipe Descriptions</h4>
+	<% if official_recipe['summary'] %>
+		<p><%= sanitize official_recipe['summary'].to_s %></p>
+	<% else %>
+		<p>No description for this recipe...</p>
+	<% end %>
+</div>
+
+
+<div class="official-recipe-description">
+	<h4>Recipe Instructions</h4>
+	<% if official_recipe['instructions'] %>
+		<p><%= sanitize official_recipe['instructions'].to_s %></p>
+	<% else %>
+		<p>No instructions for this recipe...</p>
+	<% end %>
+</div>
+
+
+<div class="official-recipe-similar soft-shadow">
+	<div>
+		<h1>Similar Recipes</h1>
+		<h6>Some suggested and related recipes</h6>
+	</div>
+	<div>
+		<% official_similar.each do |similar| %>
+			<a href="/search_recipe_info/<%= similar['id'] %>">
+				<h5><%= similar['title'] %></h5>
+				<% if !similar['imageType'].nil? %>
+					<% image_path = "https://spoonacular.com/recipeImages/#{similar['id']}-636x393.#{similar['imageType']}" %>
+					<%= image_tag( image_path, class: "soft-shadow") %>
+				<% else %>
+					<%= image_tag("image-unavailable.png", class: "soft-shadow") %>
+				<% end %>
+			</a>
+		<% end %>
+	</div>
+</div>

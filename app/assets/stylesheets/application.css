@@ -1,15 +1,777 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+* vendor/assets/stylesheets directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the bottom of the
+* compiled file so the styles you add here take precedence over styles defined in any other CSS
+* files in this directory. Styles in this file should be added after the last require_* statement.
+* It is generally better to create a new file per style scope.
+*
+*= require_tree .
+*= require_self
+*/
+
+:root {
+	--dark-gray: rgb(45, 45, 45);
+	--orange: rgb(255, 150, 0);
+	--dark-orange: rgb(232, 108, 0);
+
+	--gradient-bg: linear-gradient(-180deg, #ff9933 0%, #ff7337 100%);
+	--dark-gradient-bg: linear-gradient(-180deg, #ff7a33 0%, #ff5f37 100%);
+	--gradient-gray: linear-gradient(160deg, rgb(55, 55, 55) 0%, rgb(20, 20, 20) 100%);
+}
+
+body {
+	margin: 0;
+	background-image: url("bg_texture.png");
+	background-repeat: repeat-y;
+	background-size: cover;
+
+	/* Serve a posizionare bene la navbar */
+	padding-top: 60px;
+	/* min-height: 100vh; */
+}
+
+/* ================================================================= SCROLL BAR ======================================================================================== */
+
+/* width and height */
+*::-webkit-scrollbar {
+	width: 7.5px;
+	height: 7.5px;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+	background: rgb(232, 232, 232);
+	/* border-radius: 15px; */
+}
+
+/* Handle */
+*::-webkit-scrollbar-thumb {
+	background: rgb(155, 155, 155);;
+	border-radius: 15px;
+}
+
+/* Handle on hover */
+*::-webkit-scrollbar-thumb:hover {
+	background: rgb(119, 119, 119);;
+}
+
+/* ================================================================= MENU BAR ============================================================================================= */
+
+.menu-bar {
+	width: 100%;
+	height: 60px;
+	display: inline-flex;
+	justify-content: space-between;
+	font-size: 22px;
+	/* font-weight: bold; */
+	position: fixed;
+	top: 0px;
+
+	z-index: 5;
+}
+
+.menu-bar a {
+	text-decoration: none;
+	height: 100%;
+	display: inline-flex;
+	align-items: center;
+	margin: 0 10px;
+}
+
+.menu-bar a:hover {
+	text-decoration: underline;
+	
+}
+
+.menu-bar > div {
+	padding: 0 15px;
+	height: 100%;
+	display: inline-flex;
+	align-items: center;
+}
+
+.menu-bar > div:nth-child(1) {
+	text-align: left;
+}
+.menu-bar > div:nth-child(2) {
+	text-align: right;
+	/* background-color: var(--dark-gray); */
+	color: var(--orange);
+	clip-path: polygon(10px 0, 0 100%, 100% 100%, 100% 0%);
+	background-image: url("bg_texture.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-size: 300%;
+	background-position:right;
+	/* background: var(--gradient-gray); */
+	font-weight: bold;
+
+}
+
+.menu-bar img {
+	height: 60px;
+}
+
+.menu-bar button {
+	height: 30px;
+	line-height: 30px;
+	font-size: 22px;
+	margin-left: 10px;
+}
+
+
+/* ================================================================= FOOTER ============================================================================================= */
+
+.footer {
+	width: 100%;
+	height: 100px;
+	display: inline-flex;
+	justify-content: space-evenly;
+	font-size: 22px;
+	font-weight: bold;
+	/* position: fixed; */
+	/* top: 0px; */
+
+	/* z-index: 5; */
+	/* position: absolute;
+	margin-bottom: 0;
+	*/
+	/* position: relative;
+	bottom: -100px;  */
+
+	position: absolute;
+	bottom: 0;
+}
+
+.footer a {
+	text-decoration: none;
+	height: 100%;
+	display: inline-flex;
+	align-items: center;
+	margin: 0 10px;
+	
+}
+
+.footer a:hover {
+	text-decoration: underline;
+	
+}
+
+.footer > div {
+	padding: 0 15px;
+	height: 100%;
+	display: inline-flex;
+	align-items: center;
+}
+
+.footer > div:nth-child(1) {
+	text-align: left;
+}
+.footer > div:nth-child(2) {
+	text-align: right;
+	/* background-color: var(--dark-gray); */
+	/* color: var(--orange); */
+	/* clip-path: polygon(10px 0, 0 100%, 100% 100%, 100% 0%); */
+	/* background-image: url("bg_texture.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-size: 300%;
+	background-position:right; */
+	/* background: var(--gradient-gray); */
+}
+
+.footer img {
+	height: 60px;
+}
+
+/* 
+.footer button {
+	height: 30px;
+	line-height: 30px;
+	font-size: 22px;
+	margin-left: 10px;
+} */
+
+/* ===================================================== BACKGROUNDS ========================================================================================================== */
+
+.bg-gradient {
+	background: var(--gradient-bg);
+}
+
+.bg-dark-gradient {
+	background: var(--dark-gradient-bg);
+}
+
+.bg-gray-gradient {
+	background: var(--gradient-gray);
+}
+
+/* ===================================================== STILI ========================================================================================================== */
+
+.soft-shadow {
+	filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.4));
+}
+
+.extra-soft-shadow {
+	filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.25));
+}
+
+/* ===================================================== BUTTONS ========================================================================================================== */
+
+button {
+	all: unset;
+	border-radius: 5px;
+	background: var(--gradient-bg);
+	padding: 6px 8px;
+	height: 28px;
+	/* filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.3)); */
+}
+
+button:hover {
+	box-shadow: 0px 0px 0px 4px white;
+}
+
+button:active {
+	background: white;
+	box-shadow: 0px 0px 0px 4px white;
+}
+
+
+input[type=submit] {
+	all: unset;
+	border-radius: 5px;
+	background: var(--gradient-bg);
+	padding: 6px 8px;
+	height: 28px;
+	/* filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.3)); */
+}
+
+input[type=submit]:hover {
+	box-shadow: 0px 0px 0px 4px white;
+}
+
+input[type=submit]:active {
+	background: white;
+	box-shadow: 0px 0px 0px 4px white;
+}
+
+
+/* 
+input[type=file] {
+	all: unset;
+	border-radius: 5px;
+	background: var(--gradient-bg);
+	padding: 6px 8px;
+	height: 28px;
+} */
+
+input[type=file]::-webkit-file-upload-button {
+	/* visibility: hidden; */
+	display: none;
+}
+input[type=file]::before {
+	content: 'Select a video file';
+	display: inline-block;
+	border-radius: 10px;
+	background: var(--gradient-gray);
+	padding: 10px 15px;
+	height: 28px;
+	font-weight: bold;
+	margin: 10px;
+	filter: drop-shadow(0px 0px 4.5px rgba(0, 0, 0, 0.3));
+
+}
+input[type=file]:hover::before {
+	/* border-color: black; */
+	box-shadow: 0px 0px 0px 4px white;
+}
+input[type=file]:active::before {
+	/* background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); */
+	background: white;
+	box-shadow: 0px 0px 0px 4px white;
+}
+
+/* Converte link a bottone */
+
+.link-to-btn {
+	background: var(--gradient-bg);
+	padding: 15px 20px;
+	border-radius: 15px;
+	font-weight: bold;
+	text-decoration: none;
+	filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.4));
+	transition: 0.1s;
+}
+.link-to-btn:hover {
+	box-shadow: 0px 0px 0px 4px white;
+	text-decoration: none;
+	transition: 0.1s;
+}
+.link-to-btn:active {
+	background: white;
+	text-decoration: none;
+	box-shadow: 0px 0px 0px 4px white;
+}
+
+/* Converte bottone a link-to-btn */
+
+.btn-as-link-to-btn {
+	all: unset;
+	line-height: 24px;
+	padding: 15px 20px;
+	font-weight: bold;
+	border-radius: 15px;
+
+	filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.4));
+
+	background: var(--gradient-bg);
+}
+
+/* ===================================================== FORM INPUT ========================================================================================================== */
+
+input[type=text],
+input[type=password],
+input[type=email] {
+	all: unset;
+	background-color: white;
+	border-radius: 5px;
+	height: 30px;
+	padding: 5px 15px;
+	width: 300px;
+	color: black;
+	margin: 0 10px 0 0;
+	/* filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.3)); */
+	transition: 0.1s;
+}
+
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus {
+	box-shadow: 0px 0px 0px 8px rgba(0,0,0,0.2);
+}
+
+select {
+	all: unset;
+	background-color: white;
+	border-radius: 5px;
+	/* height: 30px; */
+	padding: 5px 15px;
+	/* width: 300px; */
+	color: black;
+	/* margin: 0 10px 0 0; */
+	/* filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.3)); */
+	text-align: left;
+	line-height: 30px;
+}
+
+select > option {
+	all: unset;
+	color: black;
+	text-align: left;
+
+}
+
+textarea {
+	all: unset;
+	background-color: white;
+	border-radius: 5px;
+	height: 30px;
+	padding: 5px 15px;
+	width: calc(100% - 30px);
+	color: black;
+	min-height: 80px;
+
+	text-align: left;
+	font-size: 1.2em;
+
+	filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.3));
+}
+
+
+
+/* ============================================================ HOMEPAGE ======================================================================= */
+
+.liquid-svg {
+	position: absolute;
+	z-index: -1;
+	top: 70px;
+}
+
+/* ============================================================ HOMEPAGE DIV ======================================================================= */
+
+.homepage-div {
+	width: 100%;
+	height: 600px;
+	margin-top: 60px;
+	display: inline-flex;
+	justify-content: space-between;
+	align-items: center;
+
+	/* background-color: blue; */
+
+}
+
+.homepage-div > div:nth-child(1) {
+	width: 100%;
+	margin: auto 0;
+	margin-left: 120px;
+	font-size: 38px;
+
+}
+.homepage-div > div:nth-child(2) {
+	height: 680px;
+	position: absolute;
+	top: 100px;
+	right: 0px;
+}
+
+.homepage-div > div:nth-child(1) > div {
+	margin: -10px 0px;
+}
+
+.homepage-div > div:nth-child(1) > div:nth-child(1) {
+	font-weight: bolder;
+	letter-spacing: 5px;
+	margin-bottom: 70px;
+	font-size: 1.5em;
+}
+.homepage-div > div:nth-child(1) > div:nth-child(2) {
+	letter-spacing: 3px;
+	font-size: 1em;
+}
+.homepage-div > div:nth-child(1) > div:nth-child(3) {
+	font-weight: bold;
+	letter-spacing: 4px;
+	font-size: 1.75em;
+}
+.homepage-div > div:nth-child(1) > div:nth-child(4) {
+	letter-spacing: 3px;
+	font-size: 0.8em;
+}
+.homepage-div > div:nth-child(1) > div:nth-child(5) {
+	font-weight: bold;
+	letter-spacing: 2px;
+	font-size: 2.05em;
+}
+.homepage-div > div:nth-child(1) > div:nth-child(6) {
+	width: 60%;
+	font-size: 0.6em;
+	margin-top: 40px;
+	font-style: italic;
+}
+
+.homepage-div > div > div > span:nth-child(1) {
+	color: var(--orange);
+	font-weight: bolder;
+}
+
+.homepage-div p {
+	margin: 10px 0;
+}
+
+.homepage-div img {
+	height: 100%;
+	object-fit: cover;
+
+}
+
+/* ============================================================ HOMEPAGE SEARCH ======================================================================= */
+
+.homepage-search {
+	width: 100%;
+	height: 500px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 140px;
+
+}
+
+.homepage-search label {
+	font-size: 55px;
+	font-weight: bold;
+}
+
+.homepage-search input[type=text] {
+	height: 50px;
+	width: 500px;
+	padding: 10px 20px;
+	font-size: 26px;
+	border-radius: 10px;
+	text-align: left;
+}
+
+
+.homepage-search button {
+	height: 60px;
+	/* width: 300px; */
+	padding: 5px 20px;
+	font-size: 30px;
+	border-radius: 10px;
+	text-align: center;
+	
+}
+
+
+.homepage-search p {
+	font-size: 24px;
+}
+
+
+.homepage-search > div:nth-child(2) {
+	text-align: right;
+	/* margin-top: 50px; */
+}
+
+
+.homepage-search > div > form > div {
+	margin-top: 10px;
+}
+
+.homepage-search > div > form > div:nth-child(3) {
+	margin-top: 30px;
+}
+
+
+.homepage-search > div:nth-child(1) {
+	width: 100%;
+	height: 100%;
+}
+
+
+.homepage-search > div:nth-child(2) {
+	width: 100%;
+	margin: -20px 0 0 0;
+	display: inline-flex;
+	z-index: 1;
+	
+}
+
+
+.homepage-search img:nth-child(2) {
+	position: absolute;
+	height: 400px;
+	object-fit: cover;
+	/* top: 50px; */
+	left: 260px;
+	transform: translateY(60px);
+	filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 1));
+}
+
+.homepage-search img:nth-child(1) {
+	position: absolute;
+	height: 500px;
+	object-fit: cover;
+	filter: brightness(0.8) drop-shadow(0px 0px 9.2px var(--dark-orange));
+}
+
+/* ==================================== Diets ============================================= */
+
+.homepage-diets {
+	width: 100%;
+	height: 500px;
+	display: inline-flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.homepage-diets > a {
+	text-decoration: none;
+	width: 22%;
+	/* height: 200px; */
+	border-radius: 20px;
+	filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.4));
+
+	font-size: 26px;
+	text-align: center;
+
+	padding: 20px 10px 0px 10px;
+
+	transition: 0.1s;
+}
+
+.homepage-diets img {
+	width: 100%;
+	object-fit: cover;
+	border-radius: 10px;
+	margin-top: 30px;
+}
+
+.homepage-diets > a:hover {
+	box-shadow: 0px 0px 0px 8px rgba(0,0,0,0.2);
+	transform: scale(1.05);
+	transition: 0.1s;
+}
+
+.homepage-diets > a > span {
+	margin: 10px 0;
+}
+
+
+.homepage-diets > a:nth-child(1) {
+	background: linear-gradient(-180deg, #d792ff 0%, #9d46ff 100%);
+}
+.homepage-diets > a:nth-child(3) {
+	background: linear-gradient(-180deg, #87e9ff 0%, #61abff 100%);
+}
+.homepage-diets > a:nth-child(2) {
+	background: linear-gradient(-180deg, #abff87 0%, #64ff61 100%);
+}
+
+/* ==================================== Random Recipes ============================================= */
+
+.homepage-random {
+	width: 100%;
+	margin: 55px 0 40px 0;
+	text-align: center;
+	font-size: 27px;
+
+	padding: 55px 0 45px 0;
+
+	background: var(--gradient-bg);
+}
+
+
+.homepage-random > div:nth-child(1) {
+	margin-bottom: 25px;
+}
+
+.homepage-random > div:nth-child(2) {
+	width: 100%;
+	height: 500px;
+	display: inline-flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.homepage-random a {
+	text-decoration: none;
+	width: 22%;
+	/* height: 200px; */
+	border-radius: 20px;
+	filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.4));
+
+	font-size: 26px;
+	text-align: center;
+
+	padding: 20px 10px 0px 10px;
+
+	transition: 0.1s;
+	background-image: url("bg_texture.png");
+	background-size: cover;
+}
+
+.homepage-random a > h5 {
+	min-height: 145px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	vertical-align: center;
+}
+
+.homepage-random img {
+	width: 100%;
+	object-fit: cover;
+	border-radius: 10px;
+	margin-top: 30px;
+}
+
+.homepage-random  a:hover {
+	box-shadow: 0px 0px 0px 8px rgba(0,0,0,0.2);
+	transform: scale(1.05);
+	transition: 0.1s;
+}
+
+/* ==================================== Users Recipes ============================================= */
+
+.user-recipes-div {
+	width: calc(100% - 50px);
+	padding-left: 50px;
+	height: 500px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: space-evenly;
+	font-size: 22px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.user-recipes-div > div:nth-child(2) > * {
+	margin: 10px 0;
+}
+
+
+.user-recipes-div > div:nth-child(2) > p {
+	font-size: 28px;
+}
+
+.user-recipes-div a {
+	padding: 20px 25px;
+	font-size: 25px;
+	font-weight: bold;
+	margin-top: 50px;
+}
+
+.user-recipes-div img {
+	height: 400px;
+	object-fit: contain;
+	transform: translate(-10px, -15px);
+}
+
+
+.user-recipes-div > div:nth-child(1) {
+	border-radius: 1000px;
+	/* padding: 50px; */
+	background: var(--gradient-bg);
+	margin-top: 20px;
+}
+
+/* ============================== DIVS ================================================ */
+
+.centered-div {
+	width: 90%;
+	/* background-color: blue; */
+	margin: 40px auto;
+}
+
+.line {
+	background-color: white;
+	width: calc(100% - 0px);
+	height: 4px;
+	margin: 5px auto;
+	border-radius: 100px;
+}
+
+.my_notice {
+	background-color: rgb(0, 255, 89);
+	font-style: bold;
+	font-size: 26px;
+	line-height: 80px;
+	padding: 0 40px;
+	animation: dissolve 0.3s 4s ease-in-out forwards;
+}
+
+.my_alert {
+	background-color: red;
+	font-style: bold;
+	font-size: 26px;
+	line-height: 80px;
+	padding: 0 40px;
+	animation: dissolve 0.5s 4s ease-in-out forwards;
+}
+
+@keyframes dissolve {
+	0% {
+		color: rgba(255,255,255,1);
+		line-height: 80px;
+	}
+	100% {
+		color: rgba(255,255,255,0);
+		line-height: 0px;
+	}
+}

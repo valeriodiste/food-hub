@@ -2,24 +2,84 @@
 <html>
 	<head>
 		<title>FoodHub</title>
+
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<%= csrf_meta_tags %>
 		<%= csp_meta_tag %>
 
 		<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 		<%= javascript_importmap_tags %>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+		<link rel="stylesheet" href="https://indestructibletype.com/fonts/Jost.css" type="text/css" charset="utf-8" />
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 	</head>
 
 	<body>
 
-		<%# Alert visualizzato in caso di operazioni con mancato permesso/autorizzazione (Canard + CanCan) %>
-		<p class="notice"><%= notice %></p>
- 		<p class="alert"><%= alert %></p>
+		<div class="menu-bar bg-gradient soft-shadow">
+			<div>
+			
+				<a href="/"><%= image_tag('food_hub_logo.png') %></a>
+				<% if request.base_url + "/" == request.original_url.to_s %>
+					<a href="/" style="opacity: 1"><b>Home Page</b></a>
+				<% else %>
+					<a href="/" style="opacity: 0.7"><span>Home Page</span></a>
+				<% end %>
+				
+				<% if request.base_url + "/recipes" == request.original_url.to_s %>
+					<a href="/recipes" style="opacity: 1"><b>User Recipes</b></a>
+				<% else %>
+					<a href="/recipes" style="opacity: 0.7"><span>User Recipes</span></a>
+				<% end %>
 
-		<!-- aggiunto per fare la prova con cucumber -->
-		<a href="/">Home Page</a>
+				
+				<% if request.base_url + "/profiles" == request.original_url.to_s %>
+					<a href="/profiles" style="opacity: 1"><b>Profile Page</b></a>
+				<% else %>
+					<a href="/profiles" style="opacity: 0.7"><span>Profile Page</span></a>
+				<% end %>
 
+			</div>
+			<div>
+				<% if user_signed_in? %>
+					<% if current_user.admin? %>
+						<%= link_to (current_user.email + " (ADMIN)"), profiles_path %>
+					<% else %>
+						<%= link_to current_user.email, profiles_path %>
+					<% end %>
+					<%= button_to "Logout", destroy_user_session_path, :onclick => "return confirm('Are you sure you want to logout?')", method: :delete %>
+				<% else %>
+					<%= link_to 'Login', new_user_session_path %>
+				<% end %>
+			</div>
+			
+		</div>
+		
+		<%# Alert visualizzato in caso di operazioni con mancato permesso/autorizzazione (Canard + CanCan) e notices %>
+		<p class="notice my_notice soft-shadow"><%= notice %></p>
+ 		<p class="alert my_alert soft-shadow"><%= alert %></p>
 
-		<%= yield %>
+		<div style="position: relative; min-height: calc(100vh - 60px);">
+
+			<div style="padding-bottom: 100px;">
+				<%= yield %>
+			</div>
+
+			<div class="footer bg-gray-gradient soft-shadow">
+				<div>
+					<%# <a href="/"><span>Home Page</span></a> %>
+					<a href="/"><%= image_tag('food_hub_logo.png') %></a>
+				</div>
+				<div>
+					<a href=""><span>Back to top</span></a>
+				</div>
+			</div>
+
+		</div>
+
 	</body>
 </html>

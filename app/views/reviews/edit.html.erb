@@ -1,9 +1,8 @@
-<h1>Editing review</h1>
+<div class="my-form edit-recipe soft-shadow">
+	<h1>Editing review</h1>
+	<%= render "form", review: @review %>
+</div>
 
-<%= render "form", review: @review %>
-
-<br>
-
-<div>
-  <%= link_to "Back to profile", profiles_path %>
+<div class="align-ending-buttons">
+	<%= link_to 'Back to previous page', :back, class: "link-to-btn" %>
 </div>

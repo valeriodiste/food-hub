@@ -41,7 +41,7 @@ gem 'omniauth-google-oauth2'
 gem 'google-api-client'
 # gem 'google-api-client', '>0.7'
 
-# Permette di utilizzare un ActiveRecord senza che ci sia effettivamente un record nel database (trsmite la classe ActiveType::Object, usata dal model video_upload.rb)
+# Permette di utilizzare un ActiveRecord senza che ci sia effettivamente un record nel database (tramite la classe ActiveType::Object, usata dal model video_upload.rb)
 gem 'active_type'	#, '0.3.1'
 
 # Gemma per l'utiliizzo delle API YouTube

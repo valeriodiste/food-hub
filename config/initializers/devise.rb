@@ -24,7 +24,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'spellcaster-noreply@gmail.com'
+  # config.mailer_sender = 'valeriodstfn@gmail.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -322,5 +322,27 @@ Devise.setup do |config|
 		}
 #   config.omniauth :google_oauth2, '676721621696-o1nndueraaj0mjkcjg30na0lqclrpkv5.apps.googleusercontent.com', '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', {}	# Giuseppe
 
+	# Per messaggi di errore?
+	config.parent_controller = 'TurboDeviseController'
+	config.navigational_formats = ['*/*', :html, :turbo_stream]
+	config.warden do |manager|
+	  manager.failure_app = TurboFailureApp
+	end
 
+end
+
+
+# ! Create custom failure for turbo
+class TurboFailureApp < Devise::FailureApp
+	def respond
+	  if request_format == :turbo_stream
+		redirect
+	  else
+		super
+	  end
+	end
+  
+	def skip_format?
+	  %w(html turbo_stream */*).include? request_format.to_s
+	end
 end

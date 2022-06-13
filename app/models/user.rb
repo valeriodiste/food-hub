@@ -9,8 +9,9 @@ class User < ApplicationRecord
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 	devise :database_authenticatable, :registerable,
-			:recoverable, :rememberable, :validatable,
-			#  :confirmable,	# Aggiungere :confirmable per la conferma via email, forse è questo l'errore che dava
+			# :recoverable, 
+			:rememberable, :validatable,
+			# :confirmable,	# Aggiungere :confirmable per la conferma via email, forse è questo l'errore che dava
 			:omniauthable,	:omniauth_providers => [:google_oauth2]		# Per OAuth (con Google in questo caso)
 
 	def self.from_omniauth(auth)
@@ -29,21 +30,5 @@ class User < ApplicationRecord
 		end
 	end
 
-	# def self.from_omniauth(access_token)
-	# 	data = access_token.info
-	# 	user = User.where(email: data['email']).first
-	# 		unless user
-	# 			user = User.create( email: data['email'],password: Devise.friendly_token[0,20])
-	# 		end
-	# 	user
-	# end
-
-	# def self.new_with_session(params, session)
-	# 	super.tap do |user|
-	# 		if data = session["devise.google_data"] && session["devise.google_data"]["extra"]["raw_info"]
-	# 			user.email = data["email"] if user.email.blank?
-	# 		end
-	# 	end
-	# end
 
 end

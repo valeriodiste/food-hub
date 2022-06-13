@@ -1,53 +1,55 @@
-<p style="color: green"><%= notice %></p>
 
-<h2> Manage Registered Users </h2>
+<div class="admin-users-list">
 
-<% if current_user.admin? %>
-	<% if @users.nil? %>
-		<p>No registered users...</p>
-	<% else %>
-		<table style="text-align:left;">
-			<thead>
-				<tr>
-					<th>User</th>
-					<th>Role</th>
-					<th>Registration Date</th>
-					<th>Registration Type</th>
-					<th>Action</th>
-				</tr>
-			</thead>
+	<h2> Manage Registered Users </h2>
 
-			<tbody>
-				<% @users.each do |user| %>
+	<% if current_user.admin? %>
+		<% if @users.nil? %>
+			<p>No registered users...</p>
+		<% else %>
+			<table>
+				<thead>
 					<tr>
-						<td><%= user.email %></td>
-						<td>
-							<% if user.admin? %>
-								admin
-							<% else %>
-								user
-							<% end %>
-						</td>
-						<td><%= user.created_at %></td>
-						<td><% if user.provider? %>
-								Login with Google
-							<% else %>
-								Normal Login
-							<% end %>
-						</td>
-
-						<td>
-							<% if user.admin? %>
-								Cannot delete an admin
-							<% else %>
-								<%= link_to 'Delete this user', "/delete_profile/#{user.id}" %>
-							<% end %>
-						</td>
+						<th>User</th>
+						<th>Role</th>
+						<th>Registration Date</th>
+						<th>Registration Type</th>
+						<th>Action</th>
 					</tr>
-				<% end %>
-			</tbody>
-		</table>
+				</thead>
+
+				<tbody>
+					<% @users.each do |user| %>
+						<tr>
+							<td><%= user.email %></td>
+							<td>
+								<% if user.admin? %>
+									admin
+								<% else %>
+									user
+								<% end %>
+							</td>
+							<td><%= user.created_at %></td>
+							<td><% if user.provider? %>
+									Login with Google
+								<% else %>
+									Normal Login
+								<% end %>
+							</td>
+
+							<td>
+								<% if user.admin? %>
+									Cannot delete an admin
+								<% else %>
+									<%= link_to 'DELETE THIS USER', "/delete_profile/#{user.id}" %>
+								<% end %>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		<% end %>
+	<% else %>
+		<p>You must be an admin user to manage registered users</p>
 	<% end %>
-<% else %>
-	<p>You must be an admin user to manage registered users</p>
-<% end %>
+</div>

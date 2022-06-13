@@ -1,35 +1,66 @@
-<div class="container">
-  <h1>Upload a video?</h1>
+<div class="add-youtube-video-to-recipe">
 
-  <p>You can upload a video of your recipe on your YouTube channel or <%= link_to "continue without uploading a video", profiles_path %></p>
-  
+	<div>
+		<h2>Upload a video?</h2>
 
-  <h2>Upload YouTube video to your channel</h2>
-  <% if current_user && !current_user.provider.nil? %>
-    <%= form_for @video_upload do |f| %>
-      <%# render 'shared/errors', object: @video_upload %>
+		<p>You can upload a video of your recipe on your YouTube channel or <%= link_to "continue without uploading a video", profiles_path %></p>
+	</div>
+	
+	<div>
+		<h1>Upload a YouTube video to your channel</h1>
 
-      <div class="form-group">
-        <%= f.label :file %>
-        <%= f.file_field :file, class: 'form-control', required: true %>
-      </div>
+		<% if current_user && !current_user.provider.nil? %>
 
-      <div class="form-group">
-        <%= f.label :title %>
-        <%= f.text_field :title, class: 'form-control', required: true %>
-      </div>
+			<%= form_for @video_upload do |f| %>
+				
+				<%# render 'shared/errors', object: @video_upload %>
 
-      <div class="form-group">
-        <%= f.label :description %>
-		<br/>
-        <%= f.text_area :description, class: 'form-control', cols: 50 %>
-      </div>
+				<div>
+					<%= f.label :file, style: "display: block"  %>
+					<%= f.file_field :file, required: true %>
+				</div>
 
-	  <%= f.hidden_field :recipetitle, :value => params[:recipetitle] %>
+				<div>
+					<%= f.label :title, style: "display: block"  %>
+					<%= f.text_field :title, required: true %>
+				</div>
 
-      <%= f.submit 'Upload', class: 'btn btn-primary' %>
-    <% end %>
-  <% else %>
-		<p><%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, method: :post %> to upload a video to YouTube.</p>
-  <% end %>
+				<div>
+					<%= f.label :description, style: "display: block" %>
+					<%= f.text_area :description, cols: 50 %>
+				</div>
+
+				<%= f.hidden_field :recipetitle, :value => params[:recipetitle] %>
+
+				<div>
+					<%= button_tag 'Reset', type: 'reset', class: "btn-as-link-to-btn" %>
+					<%= f.submit 'Upload the video', class: "btn-as-link-to-btn" %>
+				</div>
+
+			<% end %>
+		<% else %>
+				<p style="font-size: 24px; margin-top: 10px;"><%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, method: :post %> to upload a video to YouTube.</p>
+		<% end %>
+
+	</div>
+
+	<div>
+		<h1>Alternatively, you can link an existing YouTube video</h1>
+		<%= form_for @video_link do |fl| %>
+
+			<div>
+				<%= fl.label :url, "YouTube video link", style: "display: block" %>
+				<%= fl.text_field :url, required: true %>
+			</div>
+
+			<%= fl.hidden_field :recipetitle, :value => params[:recipetitle] %>
+
+			<div>
+				<%= button_tag 'Reset', type: 'reset', class: "btn-as-link-to-btn" %>
+				<%= fl.submit 'Link the video', class: "btn-as-link-to-btn" %>
+			</div>
+			
+		<% end %>
+	</div>
+
 </div>

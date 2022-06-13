@@ -1,0 +1,125 @@
+/* 
+.official-recipes-search-results {
+	width: calc(100% - 200px);
+	padding: 80px 100px;
+}
+
+.official-recipes-search-results > div {
+	width: 50%;
+} */
+
+
+.official-recipes-search-results {
+	width: 100%;
+	margin: 20px 0 40px 0;
+	text-align: center;
+	font-size: 27px;
+
+	padding: 55px 0 45px 0;
+
+	/* background: var(--gradient-bg); */
+}
+
+
+.official-recipes-search-results > div:nth-child(1) {
+	margin-bottom: 25px;
+}
+
+.official-recipes-search-results > div:nth-child(2) {
+	width: 100%;
+	/* height: 500px; */
+	display: inline-flex;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+
+.official-recipes-search-results > div > a {
+	text-decoration: none;
+	width: 40%;
+	/* height: 300px; */
+	border-radius: 20px;
+	filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.4));
+	
+	font-size: 26px;
+	text-align: center;
+	
+	padding: 25px 13px 5px 13px;
+	
+	transition: 0.1s;
+	background: var(--gradient-bg);
+	margin: 40px 0;
+
+	display: block;
+}
+.official-recipes-search-results > div > a:hover {
+	box-shadow: 0px 0px 0px 8px rgba(0,0,0,0.2);
+	transform: scale(1.05);
+	transition: 0.1s;
+}
+
+.official-recipes-search-results > div > a > h5 {
+	min-height: 110px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	vertical-align: center;
+}
+
+.official-recipes-search-results > div > a > div > img {
+	height: 220px;
+	object-fit: cover;
+	border-radius: 10px;
+}
+
+.official-recipes-search-results > div > a > div {
+	display: inline-flex;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+	margin-top: 20px;
+}
+
+.official-recipes-search-results > div > a > div > div {
+	margin: 0 15px;
+	font-size: 22px;
+	text-align: left;
+}
+
+/* ============================================ INGRIDIENTS ========================================================================= */
+
+.ingridient-info {
+	width: calc(100% - 200px);
+	margin: 20px 0 40px 0;
+	text-align: left;
+	font-size: 24px;
+
+	/* display: inline-flex; */
+	/* justify-content: space-between; */
+
+	padding: 55px 100px 45px 100px;
+
+	line-height: 42px;
+}
+.ingridient-info > div {
+	width: calc(50% - 40px);
+	background: var(--gradient-bg);
+	border-radius: 15px;
+	padding: 15px 20px;
+	margin-bottom: 35px;
+
+	line-height: 50px;
+}
+
+.ingridient-info > h4 {
+	margin-bottom: 15px;
+}
+
+.ingridient-info img {
+	width: 40%;
+	margin-left: 30px;
+	margin-bottom: 30px;
+	float: right;
+}
+

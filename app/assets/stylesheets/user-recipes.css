@@ -1,0 +1,468 @@
+
+.recipe-info {
+	font-size: 26px;
+	width: calc(100% - 120px);
+	margin: 90px 0 50px 0;
+	display: inline-flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	padding: 0 60px;
+}
+
+.recipe-info > div:nth-child(1) {
+	/* max-width: 50%;
+	*/
+	/* background-color: blue; */
+	margin-right: 30px;
+}
+
+.recipe-info > div:nth-child(2) {
+	min-width: calc(50% - 80px);
+	min-height: calc(250px - 40px);
+
+	/* width: calc(100% - 80px); */
+	/* min-height: calc(100% - 40px); */
+	padding: 20px 40px;
+	background: var(--gradient-bg);
+	border-radius: 20px;
+}
+
+.recipe-info > div:nth-child(1) > p {
+	margin: 8px 0;
+}
+
+.recipe-info > div:nth-child(1) > p:nth-child(3) {
+	font-size: 0.9em;
+}
+
+.recipe-info > div:nth-child(1) > p:nth-child(4) {
+	font-size: 0.8em;
+}
+
+/* .recipe-info > div:nth-child(2) > div {} */
+
+
+
+.recipe-video {
+	background: var(--gradient-bg);
+	width: calc(100% - 120px);
+	margin: 30px 0;
+	padding: 50px 60px 70px 60px;
+	/* font-size: 20px; */
+	font-size: 24px;
+}
+
+.recipe-video > h1 {
+	width: 100%;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.recipe-video iframe {
+	all: unset;
+	width: 750px;
+	height: 480px;
+	filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.4));
+	border-radius: 15px;
+}
+
+.recipe-video .video-info {
+	width: 100%;
+	margin: 20px 0;
+	display: inline-flex;
+	justify-content: space-evenly;
+	align-items: flex-start;
+}
+
+.recipe-video .video-info > div:nth-child(2) {
+	border-radius: 20px;
+
+	background-image: url("bg_texture.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-size: 300%;
+	background-position: center;
+
+	filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.4));
+	/* 
+	width: calc(100% - 80px);
+	margin: 0 40px; */
+	padding: 45px 40px;
+
+	font-size: 25px;
+	width: 30%;
+
+	min-height: calc(480px - 90px);
+}
+
+.recipe-video .video-info > div:nth-child(2) > div {
+	width: 100%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: space-around;
+
+	font-size: 40px;
+	margin-top: 30px;
+}
+
+
+.recipe-video .video-info > div:nth-child(2) > p:nth-child(2) {
+	margin-bottom: 20px;
+}
+.recipe-video .video-info > div:nth-child(2) > p:nth-child(5) {
+	margin-top: 20px;
+	font-size: 1.2em;
+}
+
+
+.recipe-video .video-info > div:nth-child(2) > div > span {
+	font-size: 1.2em;
+}
+
+.recipe-video .desc-comm {
+	width: 100%;
+	margin-top: 30px;
+
+	display: inline-flex;
+	align-items: flex-start;
+	justify-content: space-evenly;
+}
+
+
+.recipe-video .desc-comm > div {
+	border-radius: 20px;
+
+	background-image: url("bg_texture.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-size: 300%;
+	background-position: center;
+
+	filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.4));
+/* 
+	width: calc(100% - 80px);
+	margin: 0 40px; */
+	padding: 45px 40px;
+}
+
+.recipe-video .desc-comm > div:nth-child(1) {
+	width: calc(750px - 80px);
+	min-height: 200px;
+}
+
+.recipe-video .desc-comm > div:nth-child(2) {
+	width: 30%;
+	min-height: 200px;
+	/* width: 38%; */
+}
+
+
+.recipe-video .desc-comm > div:nth-child(2) > div {
+	border-radius: 15px;
+	background: var(--gradient-bg);
+	padding: 25px 20px;
+	filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.4));
+	margin: 20px 0;
+}
+
+
+
+
+.recipe-reviews {
+	font-size: 20px;
+	width: calc(100% - 240px);
+	margin: 50px 0;
+	/* display: inline-flex;
+	align-items: flex-start;
+	justify-content: space-between; */
+	padding: 0 120px;
+	text-align: center;
+}
+
+.recipe-reviews > div:nth-child(1) {
+	width: 90%;
+	margin: 0 auto;
+	display: inline-flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.recipe-reviews table {
+	text-align: left;
+	background: var(--gradient-bg);
+	border-radius: 25px;
+	width: 80%;
+	padding: 30px 30px;
+	margin: 30px auto;
+	filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.4));
+}
+
+
+.recipe-reviews table td {
+	padding: 5px 0;
+	font-size: 1.2em;
+}
+
+
+
+
+
+
+
+.ending-links {
+	width: 100%;
+/* 
+	display: inline-flex;
+	justify-content: space-around;
+	align-items: flex-start; */
+	text-align: center;
+
+	font-size: 28px;
+	margin: 50px 0 90px 0;
+}
+
+.ending-links > a {
+	
+	margin: 0 50px;
+}
+
+
+
+/* ====================================== RECIPE PUBLISH / UPDATE WARNING ============================================================= */
+
+.recipe-form-error {
+	text-align: left;
+	border-radius: 20px;
+	background-color: red;
+
+	width: calc(100% - 40px);
+	padding: 10px 20px;
+	margin-top: 20px;
+	margin-bottom: 30px;
+
+	filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.4));
+}
+
+/* ====================================== RECIPE / REVIEWS FORM ============================================================= */
+
+.my-form {
+	width: 500px;
+
+	padding: 35px 45px;
+	margin: 50px auto;
+
+	background: var(--gradient-bg);
+	border-radius: 30px;
+
+	text-align: center;
+}
+
+
+.my-form form {
+
+	width: 100%;
+
+	text-align: left;
+}
+
+.my-form form > div {
+
+	width: calc(100% - 40px);
+	padding: 15px 20px 20px 20px;
+	text-align: center;
+	margin: 15px 0;
+
+	border-radius: 20px;
+
+	background-image: url("bg_texture.png");
+	background-size: cover;
+	filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.4));
+
+}
+
+.my-form form > div:nth-last-child(1) {
+	background-image: none;
+	font-size: 27px;
+	margin-bottom: 10px;
+	padding-bottom: 0;
+
+	filter: none;
+}
+
+.my-form form > div:nth-child(4) {
+	text-align: left;
+	display: inline-flex;
+	justify-content: space-between;
+	padding-bottom: 15px;
+}
+
+.my-form form > div:nth-child(5) {
+	padding-bottom: 15px;
+}
+
+
+.my-form form > div label {
+	text-align: left;
+	font-weight: bold;
+	font-size: 1.8em;
+	margin-bottom: 10px;
+}
+
+
+.my-form form select {
+	width: 50%;
+	font-size: 22px;
+	line-height: 42px;	
+}
+
+
+.my-form form textarea {
+	width: 91%;
+}
+
+
+.my-form form input {
+	width: 91%;
+	text-align: left;
+	font-size: 1.5em;
+}
+
+.my-form form input[type=text] {
+	height: 40px;
+	margin: 0;
+}
+
+.my-form input[type=submit] {
+	all: unset;
+	line-height: 24px;
+	padding: 20px 25px;
+	font-weight: bold;
+	border-radius: 15px;
+
+	background: var(--gradient-gray);
+
+	filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.4));
+	
+	margin: 0 10px;
+}
+
+.my-form button[type=reset] {
+	background: var(--gradient-gray);
+
+	padding: 20px 25px;
+
+	margin: 0 10px;
+}
+
+
+/* ================================ ADD YOUTUBE VIDEO ================================================================= */
+
+.add-youtube-video-to-recipe {
+	width: 100%;
+	/* margin: 50px auto; */
+}
+
+.add-youtube-video-to-recipe > div {
+	width: 80%;
+	margin: 50px auto;
+}
+
+
+.add-youtube-video-to-recipe > div > h2 {
+	margin-bottom: 20px;
+}
+
+.add-youtube-video-to-recipe > div:nth-child(1) {
+	width: 70%;
+	padding: 40px 15%;
+	background: var(--gradient-bg);
+	margin: 0;
+	font-size: 24px;
+	/* margin: 50px auto; */
+}
+
+
+.add-youtube-video-to-recipe > div:nth-child(2), .add-youtube-video-to-recipe > div:nth-child(3) {
+	width: calc(70% - 160px);
+	padding: 50px 80px;
+	background: var(--gradient-bg);
+	border-radius: 40px;
+
+	filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.4));
+}
+
+.add-youtube-video-to-recipe form input {
+	font-size: 22px;
+}
+
+
+.add-youtube-video-to-recipe form label {
+	font-size: 26px;
+	font-weight: bold;
+	margin: 15px 0 5px 0;
+}
+
+
+.add-youtube-video-to-recipe form > div:nth-last-child(1) {
+	width: 100%;
+	text-align: center;
+	font-size: 24px;
+	margin-top: 30px;
+}
+
+.add-youtube-video-to-recipe input[type=submit] {
+	all: unset;
+	line-height: 24px;
+	padding: 20px 25px;
+	font-weight: bold;
+	border-radius: 15px;
+
+	background: var(--gradient-gray);
+
+	filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.4));
+	
+	margin: 0 20px;
+}
+
+
+.add-youtube-video-to-recipe button[type=reset] {
+	background: var(--gradient-gray);
+
+	padding: 20px 25px;
+
+	margin: 0 20px;
+}
+
+
+.add-youtube-video-to-recipe form input[type=text] {
+	width: 60%;
+	filter: drop-shadow(0px 0px 9.2px rgba(0, 0, 0, 0.4));
+}
+
+/* =========================== EDIT RECIPE ============================================================ */
+/* 
+.edit-recipe {
+	width: 500px;
+
+	padding: 35px 45px;
+	margin: 50px auto;
+
+	background: var(--gradient-bg);
+	border-radius: 30px;
+
+	text-align: center;
+} */
+
+.align-ending-buttons {
+	width: 50%;
+	padding: 0 25%;
+	text-align: center;
+	margin: 0 auto;
+	padding-bottom: 60px;
+	align-self: center;
+	height: 65px;
+	font-size: 24px;
+	display: inline-flex;
+	justify-content: space-evenly;
+}
+

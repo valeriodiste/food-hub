@@ -1,38 +1,35 @@
-<p style="color: green"><%= notice %></p>
 
+<div class="user-recipes-list">
+	<h1>User uploaded recipes</h1>
 
-<% if @recipes.nil? %>
-  <p>No recipes uploaded to the site...</p>
-<% else %>
+	<% if @recipes.empty? %>
+		<br/>
+		<p>No recipes uploaded to the website...</p>
+	<% else %>
 
+		<% @recipes.reverse.each do |recipe| %>
+			<div>
+				<div>
+					<div>
+						<h3><%= recipe.title %></h3>
+						<h5><%= recipe.user.email %></h5>
+					</div>
+					<div>
+						<%= link_to 'Show this recipe', recipe, class: "link-to-btn" %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Username</th>
-      <th><a href="/">Back</th>
-      <!--<th colspan="3"></th>-->
-    </tr>
-  </thead>
+						<%# Opzione che compare solo se l'utente corrente possiede il ruolo necessario a svolgere l'azione %>
+						<% if can? :destroy, recipe %>
+							<br/>
+							<br/>
+							<%= link_to 'DELETE RECIPE', "recipes_destroy/#{recipe.id}" , method: :delete, data: { confirm: 'Are you sure?' } %>
+						<% end %>
+					</div>
+				</div>
+				<div>
+					<%= recipe.description %>
+				</div>
+			</div>
+		<% end %>
 
-  <tbody>
-	<% @recipes.each do |recipe| %>
-		<tr>
-			<td><%= recipe.title %></td>
-			<td><%= recipe.user.email %></td>
-			<td><%= link_to 'Show', recipe %></td>
-			<!--
-			<td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
-			-->
-
-			<%# Opzione che compare solo se l'utente corrente possiede il ruolo necessario a svolgere l'azione %>
-			<% if can? :destroy, recipe %>
-				<td><%= link_to 'Delete Recipe', "recipes_destroy/#{recipe.id}" , method: :delete, data: { confirm: 'Are you sure?' } %></td>
-			<% end %>
-		</tr>
 	<% end %>
-</tbody>
-</table>
-
-<% end %>
+</div>

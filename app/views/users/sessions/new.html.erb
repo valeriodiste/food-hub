@@ -1,32 +1,40 @@
-<p style="color: green"><%= notice %></p>
 
-<h2>Log in</h2>
+<div class="user-form soft-shadow">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-	<div class="field">
-		<%= f.label :email %><br />
-		<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-	</div>
+	<h1>Sign in</h1>
 
-	<div class="field">
-		<%= f.label :password %><br />
-		<%= f.password_field :password, autocomplete: "current-password" %>
-	</div>
+	<%# Non sembra funzionare... %>
+	<%= render "users/shared/error_messages", resource: resource %>
 
-	<% if devise_mapping.rememberable? %>
-		<div class="field">
-		<%= f.check_box :remember_me %>
-		<%= f.label :remember_me %>
+	<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+		
+		<div>
+			<div class="field">
+				<%= f.label :email, style: "display: block;"  %>
+				<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+			</div>
+
+			<div class="field">
+				<%= f.label :password, style: "display: block;"  %>
+				<%= f.password_field :password, autocomplete: "current-password" %>
+			</div>
+
+			<% if devise_mapping.rememberable? %>
+				<div class="field user-remember-me" >
+					<%= f.check_box :remember_me %>
+					<%= f.label :remember_me %>
+				</div>
+			<% end %>
 		</div>
+
+		<div class="actions">
+			<%= button_tag 'Reset', type: 'reset', class: "btn-as-link-to-btn" %>
+			<%= f.submit "Login", class: "btn-as-link-to-btn" %>
+		</div>
+		
 	<% end %>
 
-	<div class="actions">
-		<%= f.submit "Log in" %>
+	<%= render "users/shared/links" %>
 
-	</div>
+</div>
 
-	<%# link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, method: :post %>
-
-<% end %>
-
-<%= render "users/shared/links" %>

@@ -1,68 +1,117 @@
-<!DOCTYPE html>
-<html>
-<head>
-<!--
-credo che questi link si possano togliere
--->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-</head>
-<body>
+
+<svg viewBox="0 0 1920 1869" class="liquid-svg">
+	<defs>
+		<linearGradient id="gradient">
+			<stop offset="0%" stop-color="#FF7337"/>
+			<stop offset="100%" stop-color="#FF9933"/>
+		</linearGradient>
+	</defs>
+	<path fill="url(#gradient)" class="soft-shadow" d="M2103,65c-56-37.56-106.53,29.5-349,76-148.65,28.51-279.49,33.56-349,36-219.41,7.71-278.94-19-385,31-29.15,13.74-115.84,54.61-169,144-95.58,160.72,33.93,282.09-36,405C731.63,903.54,443.34,914.18,96,927c-198.94,7.34-249.2-8.61-309,41-91.68,76.06-84.12,246-69,586,6.85,153.9,1.69,233,53,262,25.28,14.29,50.58,9.43,135-9,129.56-28.28,239.2-53.74,273-61,126.47-27.17,133.57-2.07,282-20,151.41-18.29,295.87-35.74,417-131,112.26-88.28,78.12-144,212-261,75.43-65.92,161.8-141.38,286-156,117.88-13.87,279.24,26,380-4a602.7,602.7,0,0,0,57.79-20.69c60.1-27.13,83.16-58.16,212.21-97.31,160-48.53,228.82-31.67,257-82,39.9-71.26-72.54-150.71-135-323C2041.24,356.51,2204.66,133.21,2103,65Z"/>
+</svg>
 
 
-<%# andare a cercare e eliminare il flash notice da qualche controller (mi dice che devo loggarmi quando ritorno alla home dalla barra degli url)%>
-<div class="col-lg-12 mt-5">
-      <% if flash[:alert] %>
-        <div class="alert alert-warning"><%= flash[:alert] %></div>
-      <% end %>
-      <div class="mx-auto mt-5" style="width: 400px"></div>
+<div class="homepage-div">
+	<div class="soft-shadow">
+		<div>WELCOME TO <span>FOOD HUB<span></div>
+		<div>GET <i><b>INSPIRED</b></i> BY</div>
+		<div><span>DELICIOUS<span> <span>FOOD<span></div>
+		<div>WITH <i><b>COUNTLESS</b></i> AND</div>
+		<div><span>AMAZING<span> <span>RECIPES<span></div>
+
+		<div>
+			<p>FOOD HUB let you search for <b>over 5.000 detailed recipes</b>, see information of <b>over 2.600 recipe ingredients</b>, and enjoy countless </b>user suggested recipes</b>.</p>
+			<p>You can <b>publish your recipes</b> too and be a part of the best food and recipe communitiy on the internet, the FOOD HUB.<p>
+		</div>
+	</div>
+	<div>
+		<%= image_tag("homepage-food.png") %>
+	</div>
 </div>
 
-
-<!--da mettere nella navbar e includerla in tutte le pagine, compreso il codice per fare il login/profilo 
-(si dovrebbe inserire tutto in layouts/application.html.erb)
--->
-<% if user_signed_in? %>
-Logged in as <%= current_user.email%>
-<%= button_to "Logout", destroy_user_session_path, :onclick => "return confirm('Are you sure you want to logout?')", method: :delete %>
-<% end %>
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12 mt-5">
-      <div class="mx-auto mt-5" style="width: 400px">
-        <%= form_with(url: search_path, method: 'get', local: true) do %>
-          <div class="form-group">
-            <%= label_tag :recipe, 'Search for a recipe '%>
-            <%= text_field_tag :recipe, nil, placeholder: 'Eg. Pasta', class: 'form-control' %>
-          </div>
-          <%= button_tag 'Search', class: 'btn btn-success btn-block' %>
-        <% end %>
-      </div>
-    </div>
-  </div>
+<div class="homepage-search">
+	<div>
+		<%= image_tag("homepage-eating.png") %>
+		<%= image_tag("food_hub_logo.png", class: "soft-shadow") %>
+	</div>
+	<div class="soft-shadow">
+		<%= form_with(url: search_path, method: 'get', local: true) do %>
+			<div>
+				<%= label_tag :recipe, 'Search for a recipe '%>
+			</div>
+			<div>
+				<p><i>Search for more than 5.000 official recipes in our website</i></p>
+			</div>
+			<div>
+				<%= text_field_tag :recipe, nil, placeholder: 'Eg. Pasta' %>
+				<%= button_tag 'Search' %>
+			</div>
+		<% end %>
+	</div>
 </div>
-<a href="search_diet/glutenfree">Gluten Free</a>
-<a href="search_diet/vegetarian">Vegetarian</a>
-<a href="search_diet/vegan">Vegan</a>
 
-<h4>Random Recipes:</h4>
-    <% @random_recipe.each do |random| %>
-    <dl>
-        <dd><a href="/search_recipe_info/<%= random['id'] %>"><%= random['title'] %></a></dd>
-    </dl>
-    <% end %>
+<div class="homepage-diets">
+	<a href="search_diet/glutenfree">
+		<h4>Gluten Free</h4>
+		<br/>
+		<p>Browse all the gluten free official recipes</p>
+		<%= image_tag("gluten_free.png", class: "soft-shadow") %>
+	</a>
+	<a href="search_diet/vegetarian">
+		<h4>Vegetarian</h4>
+		<br/>
+		<p>Browse all the vegetarian official recipes</p>
+		<%= image_tag("vegetarian.png", class: "soft-shadow") %>
+	</a>
+	<a href="search_diet/vegan">
+		<h4>Vegan</h4>
+		<br/>
+		<p>Browse all the vegan official recipes</p>
+		<%= image_tag("vegan.png", class: "soft-shadow") %>
+	</a>
+</div>
 
-<a href="/recipes">Recipe List</a> |
+<div class="homepage-random soft-shadow">
+	<div>
+		<h1>RANDOM RECIPES</h1>
+		<h6>Some random recipes to get inspiration from</h6>
+	</div>
+	<div>
+		<%# Utilizzato per i test della homepage quando si finiscono le chiamate all'API di Spoonacular %>
+		<%#	# Genera 3 ricette inserite da me (di cui una senza l'immagine)
+			randoms =  [
+				{"id" => 1, "title" => "Pasta con pollo e peperoni al miele", "image" => "vegan.png" },
+				{"id" => 2, "title" => "Pizza con patate" },
+				{"id" => 3, "title" => "Polpette di manzo", "image" => "vegetarian.png" }
+			]
+		%>
+		<%#	# Genera 2 ricette dall'API ed 1 inserita da me, senza immagine (ATTENZIONE: Cambiare il numero di ricette richieste all'API spoonacular da 3 a 2)
+			randoms = @random_recipe 
+			randoms.push({"id" => 2, "title" => "Pizza con patate" },)	
+		%>
+		<%# Genera 3 ricette con la sola API Spoonacular %>
+		<% randoms = @random_recipe %>
 
-<!-- da inserire nella navbar
--->
-<% if user_signed_in? %>
-  <a href="/profiles">Profile</a>
-<% else %>
-  <%= link_to 'Login', new_user_session_path %>
-<% end %>
+		<% randoms.each do |random| %>
+			<a href="/search_recipe_info/<%= random['id'] %>">
+				<h5><%= random['title'] %></h5>
+				<% if !random['image'].nil? %>
+					<%= image_tag(random['image'], class: "soft-shadow") %>
+				<% else %>
+					<%= image_tag("image-unavailable.png", class: "soft-shadow") %>
+				<% end %>
+			</a>
+		<% end %>
+	</div>
+</div>
 
-
-</body>
-</html>
+<div class="user-recipes-div">
+	<div class="soft-shadow">
+		<%= image_tag("recipe-hub.png", class: "soft-shadow") %>
+	</div>
+	<div class="soft-shadow">
+		<h2>Users' suggested recipes</h2>
+		<p>Browse all the recipes suggested by the amazing<br/>community of FOOD HUB</p>
+		<br/>
+		<a href="/recipes" class="link-to-btn">Browse users' suggested recipes</a>
+	</div>
+</div>

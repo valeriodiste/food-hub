@@ -1,22 +1,27 @@
 <div id="<%= dom_id @user %>">
 	<p>
-		<strong>Username:</strong>
+		<h3>
 		<%= @user.email %>
 		<% if @user.admin? %>
 			(admin)
 		<% end %>
+		</h3>
 	</p>
 	<p>
-		<strong>Registered at:</strong>
+		Registered at: 
+		<b>
 		<%= @user.created_at %>
+		</b>
 	</p>
 	<p>
-		<strong>Registration Type:</strong>
+		Registration Type:
+		<b>
 		<% if @user.provider? %>
 			Login with Google
 		<% else %>
 			Normal Login
 		<% end %>
+		</b>
 	</p>
 
 </div>

@@ -1,124 +1,123 @@
-<p style="color: green"><%= notice %></p>
 
-<!--
-<div id="<%= dom_id @user %>">
-  <p>
-    <strong>Username:</strong>
-    <%= @user.email %>
-  </p>
+<div class="user-info">
+	<div>
+		<h2>Profile Page</h2>
+
+		<% if @user.provider.nil? %>
+			<%= link_to "Edit your account", edit_user_registration_path , class: "link-to-btn"%>
+		<% end %>
+		
+	</div>
+
+	<div>
+		<%= render :partial => 'profile', user: @user %>
+
+		<div>
+			<%= button_to "Delete my account",  registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete %>
+		</div>
+		
+	</div>
+
+
 </div>
--->
 
+<%# <div class="line" style="width: 90%"></div> %>
 
-<!-- non so se questa versione con il partial _profiles è corretta rispetto a quella commentata sopra
--->
-<%= render :partial => 'profile', user: @user %>
+<div class="user-recipes soft-shadow">
 
-<div>
-	<% if @user.provider.nil? %>
-  		<%= link_to "Edit this user", edit_user_registration_path %>
+	<div>
+		<h2> Your Recipes </h2>
+		<%= link_to "Publish your recipe", new_user_recipe_path(@user), class: "link-to-btn" %>
+	</div>
+	<div>
+		<% if @user.recipes.empty? %>
+			<h4>You didn't publish any recipe yet...</h4>
+		<% else %>
+			<% @user.recipes.reverse.each do |r| %>
+				<div>
+					<div>
+						<div>
+							<h4><%= r.title %></h4>
+						</div>
+					</div>
+					<div>
+						<div>
+							<p><%= r.description %></p>
+						</div>
+					</div>
+					<div>
+						<div>
+							<%= link_to "Show this recipe", r, class: "link-to-btn" %>
+						</div>
+						<div>
+							<%= link_to "Edit this recipe", edit_recipe_path(r), class: "link-to-btn" %>
+						</div>
+						<div>
+							<a href="/recipes_destroy/<%= r.id %>" class="link-to-btn">Delete this recipe</a>
+						</div>
+					</div>
+				</div>
+			<% end %>
+		<% end %>
+	</div>
+</div>
+
+<%# <div class="line" style="width: 90%"></div> %>
+
+<div class="recipe-reviews">
+	<div>
+		<h2>Your Reviews</h2>
+	</div>
+	<% if @user.reviews.empty? %>
+		<table>
+			<tr>
+				<td>
+					<h4>You didn't publish any review yet...</h4>
+				</td>
+			</tr>
+		</table>
+	<% else %>
+		<% @user.reviews.reverse.each do |r| %>
+			<table>
+				<tr>
+					<td>
+						<h5>Review for <%= link_to Recipe.find(r.recipe_id).title, Recipe.find(r.recipe_id) %></h5>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<% (r.rating).times do %>
+							<span class="fa fa-star" style="color: white;"></span>
+						<% end %>
+						<% (5 - r.rating).times do %>
+							<span class="fa fa-star" style="color: gray;"></span>
+						<% end %>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<%= r.description %>
+					</td>
+				</tr>
+				<tr>
+						<td>
+						<%= link_to "Edit this review", edit_review_path(r) %>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="/reviews_destroy/<%= r.id %>">Delete Review</a>
+					</td>
+				</tr>
+			</table>
+		<% end %>
 	<% end %>
-  <!--
-  <%= link_to "Back to users", users_path %>
--->
-  <%= button_to "Delete my account",  registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete %>
-
-  <br>
-  <%= link_to "Add a Recipe", new_user_recipe_path(@user) %>
-
-<h2> Recipes: </h2>
-  <% if @user.recipes.empty? %>
-    <p>No recipes published by this user...</p>
-  <% else %>
-    <ul>
-    <% @user.recipes.each do |r| %>
-      <table>
-        <tr>
-          <td>
-            Recipe title:
-          </td>
-          <td>
-            <%= r.title %>
-          </td>
-		  <td>
-			  <%= link_to "Show this recipe", r %>
-          </td>
-          <td>
-            <%= link_to "Edit this recipe", edit_recipe_path(r) %>
-          </td>
-          <td>
-            <a href="/recipes_destroy/<%= r.id %>">Delete Recipe</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Description:
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <%= r.description %>
-          </td>
-        </tr>
-      </table>   
-    <% end %>
-    </ul>
-  <% end %>
-
-
-
-
-  <h2> Reviews: </h2>
-  <% if @user.reviews.empty? %>
-    <p>No reviews for this user...</p>
-  <% else %>
-    <ul>
-    <% @user.reviews.each do |r| %>
-      <table>
-        <tr>
-          <td>
-            Recipe title:
-          </td>
-          <td>
-            <%= Recipe.find(r.recipe_id).title %>
-          </td>
-		  <td>
-			  <%= link_to "Show related recipe", Recipe.find(r.recipe_id) %>
-          </td>
-          <td>
-            <%= link_to "Edit this review", edit_review_path(r) %>
-          </td>
-          <td>
-            <a href="/reviews_destroy/<%= r.id %>">Delete Review</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Rating:
-          </td>
-          <td>
-            <%= r.rating %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Description:
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <%= r.description %>
-          </td>
-        </tr>
-      </table>   
-    <% end %>
-    </ul>
-  <% end %>
 </div>
 
 <% if current_user.admin? %>
-	<div>
+	<div class="admin-controls">
 		<h3>Admin controls</h3>
-		<%= link_to "Manage registered users", show_profiles_url %>
+		<%= link_to "MANAGE REGISTERED USERS", show_profiles_url %>
 	</div>
 <% end %>
+

@@ -1,123 +1,169 @@
-<p style="color: green"><%= notice %></p>
+	<div class="recipe-info">
+		<div>
+			<%# <strong>Title:</strong> %>
+			<h2><%= @recipe.title %></h2>
 
-<p>
-  <strong>Title:</strong>
-  <%= @recipe.title %>
-</p>
-<p>
-  <strong>Username:</strong>
-  <%= @recipe.user.email %>
-</p>
-<p>
-  <strong>Typology:</strong>
-  <%= @recipe.typology %>
-</p>
-<p>
-  <strong>Description:</strong>
-  <%= @recipe.description %>
-</p>
-<p>
-  <strong>Published at:</strong>
-  <%= @recipe.created_at %>
-</p>
-
-<%# Opzione che compare solo se l'utente corrente possiede il ruolo necessario a svolgere l'azione %>
-<% if can? :destroy, @recipe %>
-	<%= link_to 'Delete Recipe', "/recipes_destroy/#{@recipe.id}" , method: :delete, data: { confirm: 'Are you sure?' } %>
-	<br/>
-	<br/>
-<% end %>
-
-<% if @recipe.video %>
-
-	<% 
-		video_id = @recipe.video.remove("https://www.youtube.com/watch?v=")
-		video = Yt::Video.new(id: video_id)
-	%>
-	
-	<div class="container">
-		<h1>Video of the recipe</h1>
-		<% if !video %>
-			<p> The video for this recipe was deleted by its uploader </p>
-		<% else %>
-			<div class="col-md-4">
-				<div class="caption">
-					<h2><%= video.title %></h2>
-					<p>Published at <b><%= video.published_at.strftime('%-d %B %Y %H:%M:%S') %></b></p>
-					<p>Likes: <b><%= video.like_count %></b></p>
-				</div>
-				<% video_url = "https://www.youtube.com/embed/#{video.id}" %>
-				<iframe 
-					src= "<%= video_url %>" 
-					width="420" height="315" >
-				</iframe>
-				<div>
-					<h3>Video Comments</h3>
-					<%
-						video_comments = video.comment_threads.first
-					%>
-					<% if video_comments.nil? %>
-						<p>No comments to show for this video...</p>
-					<% else %>
-						<p><b><%= video_comments.author_display_name %></b></p>
-						<p><%= video_comments.text_display %></p>
-						<%= link_to "Show more comments", @recipe.video %>
-					<%end%>
-				</div>
+			<p>
+				Published by: 
+				<strong><%= @recipe.user.email %></strong>
+				<br/>
+				<br/>
+			</p>
+			<p>
+				Typology: 
+				<strong><%= @recipe.typology %></strong>
+			</p>
+			<p>
+				<i>
+					Published at: 
+					<strong><%= @recipe.created_at %></strong>
+				</i>
+			</p>
+			
+			<%# Opzione che compare solo se l'utente corrente possiede il ruolo necessario a svolgere l'azione %>
+			<% if can? :destroy, @recipe  %>
+				<br/>
+				<%= link_to 'DELETE THIS RECIPE', "/recipes_destroy/#{@recipe.id}" , method: :delete, data: { confirm: 'Are you sure?' } %>
+				<br/>
+				<br/>
+			<% end %>
+		</div>
+		<div>
+			<div>
+				<h5>Recipe Description</h5>
+				<div class="line"></div>
+				<p><%= @recipe.description %></p>
 			</div>
+		</div>
+		
+	</div>
+
+	<% if @recipe.video %>
+		<% 
+			video_id = @recipe.video.remove("https://www.youtube.com/watch?v=")
+			video = Yt::Video.new(id: video_id)
+		%>
+		<div class="recipe-video">
+
+			<h1>YouTube video of the recipe</h1>
+
+			<%# <div class="line"></div> %>
+			
+			<% if !video %>
+				<p> The video for this recipe was deleted by its uploader </p>
+			<% else %>
+				<div class="video-info">
+					<div>
+						<% video_url = "https://www.youtube.com/embed/#{video.id}" %>
+						<iframe 
+							src= "<%= video_url %>" 
+							width="630" height="473" 
+							class="soft-shadow">
+						</iframe>
+					</div>
+					<div>
+						<h3><%= video.title %></h3>
+						<p>by <b><%= video.channel_title %></b></p>
+						<p><i>Published at <b><%= video.published_at.strftime('%-d %B %Y %H:%M:%S') %></b></i></p>
+						<div>
+							<p><b><%= video.view_count %></b> <i class="fa fa-eye" aria-hidden="true"></i></p>
+							<p><b><%= video.like_count %></b> <i class="fa fa-thumbs-up"></i></p>
+							<p><b><%= video.comment_count %></b> <i class="fa fa-solid fa-comment"></i></p>
+						</div>
+						<p>Length of the video: <b><%= video.length %></b></p>
+						<br/>
+					</div>
+				</div>
+				<%# <div class="line"></div> %>
+				<div class="desc-comm">
+					<div>
+						<h3>Video Description</h3>
+						<%= truncate(video.description, length: 600) %>
+						<% if video.description.length > 600 %>
+							<%= link_to "Read more", @recipe.video %>
+						<%end%>
+					</div>
+					<div>
+						<h3>Video Comments</h3>
+						<%
+							video_comments = video.comment_threads.first
+						%>
+						<% if video_comments.nil? %>
+							<p>No comments to show for this video...</p>
+						<% else %>
+							<div>
+								<p><b><%= video_comments.author_display_name %></b></p>
+								<p><%= video_comments.text_display %></p>
+							</div>
+							<%= link_to "Show more comments", @recipe.video %>
+						<%end%>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	<% end %>
+
+	<div class="recipe-reviews">
+		<div>
+			<h2>User Reviews</h2>
+			<a href="<%= new_recipe_review_path(@recipe) %>" class="link-to-btn">
+				Add your review
+			</a>
+		</div>
+		<% if @recipe.reviews.empty? %>
+			<table>
+				<tr>
+					<td>
+						<h4>No reviews for this recipe...</h4>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>You can add your own review by clicking the button above</p>
+					</td>
+				</tr>
+			</table>
+		<% else %>
+			<% @recipe.reviews.each do |r| %>
+				<table>
+					<tr>
+						<td>
+							<h5><%= r.user.email %></h5>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<% (r.rating).times do %>
+								<span class="fa fa-star" style="color: white;"></span>
+							<% end %>
+							<% (5 - r.rating).times do %>
+								<span class="fa fa-star" style="color: gray;"></span>
+							<% end %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<%= r.description %>
+						</td>
+					</tr>
+					<tr>
+						<%# Opzione che compare solo se l'utente corrente possiede il ruolo necessario a svolgere l'azione %>
+						<% if can? :destroy, r %>
+							<td><%= link_to 'DELETE REVIEW', "/reviews_destroy/#{r.id}" , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+						<% end %>
+					</tr>
+				</table>
+			<% end %>
 		<% end %>
 	</div>
-	<br/>
 
-<% end %>
+	<div class="ending-links">
+		<a href="<%= recipes_path %>" class="link-to-btn">
+			Browse all user recipes
+		</a>
 
+		<%= link_to 'Back to previous page', :back, class: "link-to-btn" %>
+			
+		</a>
+	</div>
 
-<%= link_to 'Add Review', new_recipe_review_path(@recipe) %> |
-<%= link_to 'All recipes', recipes_path %>
-
-<% if user_signed_in? %>
-<!--
-  <%= link_to "Back", :back %>
-  -->
-  <%= link_to '| Back', :back %>
-<% end %>
-
-<h2> Reviews: </h2>
-  <% if @recipe.reviews.empty? %>
-    <p>No reviews for this recipe...</p>
-  <% else %>
-    <ul>
-    <% @recipe.reviews.each do |r| %>
-      <table>
-        <tr>
-          <td>
-            <%= r.user.email %>
-          </td>
-			<%# Opzione che compare solo se l'utente corrente possiede il ruolo necessario a svolgere l'azione %>
-			<% if can? :destroy, r %>
-				<td><%= link_to 'Delete Review', "/reviews_destroy/#{r.id}" , method: :delete, data: { confirm: 'Are you sure?' } %></td>
-			<% end %>
-          <td>
-            Rating:
-          </td>
-          <td>
-            <%= r.rating %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Description:
-          </td>
-        </tr>
-        <tr>
-        <td>
-          <%= r.description %>
-        </td>
-        </tr>
-      </table>   
-    <% end %>
-    </ul>
-  <% end %>
-<!--
-<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
--->
